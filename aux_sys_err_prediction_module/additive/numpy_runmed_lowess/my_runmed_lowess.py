@@ -1,6 +1,6 @@
-from my_lowess import lowess
+from aux_sys_err_prediction_module.additive.numpy_runmed_lowess.my_lowess import lowess
 from numpy import array, lexsort, where, vstack, ceil, average, median
-from my_runmed import runmed
+from aux_sys_err_prediction_module.additive.numpy_runmed_spline.my_runmed import runmed
 from scipy.interpolate import splev, splrep
 ##import time
 ##import psyco
@@ -83,7 +83,7 @@ if __name__ == '__main__':
     tic = time.clock()
     newY, runMed = runmed_lowess_model(A[:,0], A[:,1], A[:,0], runMedSpan=0.5, f=0.1, itr=3)
     toc = time.clock()
-    print 'done in %s seconds' % (toc-tic)
+    print('done in %s seconds' % (toc-tic))
     yRes = A[:,1] - newY
 
     plot(A[:,0],A[:,1],'bo')

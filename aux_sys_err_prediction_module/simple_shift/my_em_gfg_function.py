@@ -74,7 +74,7 @@ if __name__ == '__main__':
     mean2 = mean1
     stdev2 = 50
     t2 = c()
-    print 'DONE in %s sec' % (t2-t1)
+    print('DONE in %s sec' % (t2-t1))
 
     #---Diagnostic Plot---------------------------------------------
     def dnorm(x, m, s):

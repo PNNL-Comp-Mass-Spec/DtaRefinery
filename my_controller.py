@@ -42,7 +42,7 @@ class Controller:
 
     def printVersion(self):
         statusString = "DtaRefinery %s" % self.version
-        print statusString
+        print(statusString)
         self.logFh.write(statusString+'\n')
         self.logFh.flush()
         
@@ -67,7 +67,7 @@ class Controller:
             statusString = '\n' + 'Warning! Did not find one of the X!Tandem files\n'
             statusString = statusString + ('switching to the default X!Tandem location at\n%s\n' %
                                             os.path.abspath(os.path.join(self.dtaRefineryDir, 'aux_xtandem_module')))
-            print statusString
+            print(statusString)
             self.logFh.write(statusString+'\n')
             self.logFh.flush()
             #
@@ -85,7 +85,7 @@ class Controller:
                 statusString += 'filenames:\n%s\n%s\n%s\n' % (  self.xtandemExePath,
                                                                 self.xtandemDefaultInputPath,
                                                                 self.xtandemTaxonomyListPath)
-                print statusString
+                print(statusString)
                 self.logFh.write(statusString+'\n')
                 self.logFh.flush()
                 self.logFh.close()
@@ -214,19 +214,19 @@ class Controller:
             try:
                 localTime = time.strftime("%m/%d/%y %H:%M:%S", time.localtime())
                 statusString = 'step 1.  starting x!tandem run. %s' % localTime 
-                print '\n'+statusString
+                print('\n'+statusString)
                 self.logFh.write(statusString+'\n')
                 self.logFh.flush()
                 subprocess.call([self.xtandemExePath,cfgFileName])
                 localTime = time.strftime("%m/%d/%y %H:%M:%S", time.localtime())
                 statusString = 'step 1.  finished x!tandem run. %s' % localTime 
-                print statusString
+                print(statusString)
                 self.logFh.write(statusString+'\n')
                 self.logFh.flush()
             except:
                 localTime = time.strftime("%m/%d/%y %H:%M:%S", time.localtime())
                 statusString = 'step 1.  x!tandem run has failed! %s' % localTime 
-                print '\n'+statusString
+                print('\n'+statusString)
                 self.logFh.write(statusString+'\n')
                 self.logFh.flush()
                 self.logFh.close()
@@ -249,8 +249,8 @@ class Controller:
             scanCharge = [i[0:2] for i in xTandemRes[1:]]
             numIds = len(dict.fromkeys(scanCharge))
             if numIds < 2:
-                print 'number of spectra identified less than 2!!'
-                print 'stop processing!!'
+                print('number of spectra identified less than 2!!')
+                print('stop processing!!')
                 self.logFh.write('number of spectra identified less than 2!!\n')
                 self.logFh.write('stop processing!!\n')
                 self.logFh.flush()
@@ -267,7 +267,7 @@ class Controller:
             profileFile = dtaToLogPttrn.sub(r'\1_profile.txt',dtaFile)
             if (os.path.exists(logFile) and os.path.exists(profileFile)):
                 statusString = '\tfound files from DeconMSn\n\t%s\n\t%s\n' % (os.path.basename(logFile),os.path.basename(profileFile))
-                print statusString
+                print(statusString)
                 self.logFh.write(statusString+'\n')
                 self.logFh.flush()
                 #
@@ -276,19 +276,19 @@ class Controller:
                 try:
                     t1 = time.clock()
                     statusString = "step 2.  parsing dta and log files"
-                    print statusString
+                    print(statusString)
                     self.logFh.write(statusString+'\n')
                     self.logFh.flush()
                     dtaLogData = do_read_dta_n_log_n_profile_files( dtaFile, logFile, profileFile)
                     t2 = time.clock()
                     statusString = "step 2.  done parsing dta and log files"
-                    print statusString
+                    print(statusString)
                     self.logFh.write(statusString+'\n')
                     self.logFh.flush()
                 except:
                     statusString = "step 2.  failed parsing dta and/or DeconMSn_log and/or profile files\n"
                     statusString = statusString + '\tfilenames: %s \n %s \n %s' % (dtaFile, logFile, profileFile)
-                    print statusString
+                    print(statusString)
                     self.logFh.write(statusString+'\n')
                     self.logFh.flush()
                     self.logFh.close()
@@ -302,26 +302,26 @@ class Controller:
                 statusString = statusString + '\n' + "\tthus, the program assumes that the concatenated dta file"
                 statusString = statusString + '\n' + "\tis from extract_msn and won\'t use TIC and ion intensity"
                 statusString = statusString + '\n' + "\tif those parameters were selected for regression analysis"                
-                print statusString
+                print(statusString)
                 self.logFh.write(statusString+'\n')
                 self.logFh.flush()
                 #
                 self.logFileMissing = True
                 try:
                     statusString = "step 2.  parsing dta file %s" % os.path.basename(dtaFile)
-                    print statusString
+                    print(statusString)
                     self.logFh.write(statusString+'\n')
                     self.logFh.flush()
                     #
                     dtaLogData = do_read_just_dta_file( dtaFile) # VLAD. Bram Snijders parsing problem #2
                     #
                     statusString = "step 2.  done parsing dta file %s" % os.path.basename(dtaFile)
-                    print statusString
+                    print(statusString)
                     self.logFh.write(statusString+'\n')
                     self.logFh.flush()
                 except:
                     statusString = "step 2.  failed parsing dta file %s" % os.path.basename(dtaFile) 
-                    print statusString
+                    print(statusString)
                     self.logFh.write(statusString+'\n')
                     self.logFh.flush()
                     self.logFh.close()
@@ -344,9 +344,9 @@ class Controller:
             # save the settings file
             # there will be a file per file
             # which is somewhat redundant
-            if self.updatedSettings.has_key('spectra dataset'):
+            if 'spectra dataset' in self.updatedSettings:
                 del self.updatedSettings['spectra dataset']
-            if self.updatedSettings.has_key('spectra directory'):
+            if 'spectra directory' in self.updatedSettings:
                 del self.updatedSettings['spectra directory']
                 
             # now check that if regression selected there is at least one dimension selected
@@ -370,7 +370,7 @@ class Controller:
             try:
                 localTime = time.strftime("%m/%d/%y %H:%M:%S", time.localtime())
                 statusString = 'step 3.  starting refining the parent ion masses %s' % localTime
-                print statusString
+                print(statusString)
                 self.logFh.write(statusString+'\n')
                 self.logFh.flush()
                 #
@@ -385,7 +385,7 @@ class Controller:
                 elif mainApproach == 'bypassRefining':
                     approach = mainApproach
                 statusString = '\trefining with %s approach' % approach
-                print statusString
+                print(statusString)
                 self.logFh.write(statusString+'\n')
                 self.logFh.flush()
                 #
@@ -396,13 +396,13 @@ class Controller:
                 #
                 localTime = time.strftime("%m/%d/%y %H:%M:%S", time.localtime())
                 statusString = 'step 3.  done refining the parent ion masses %s' % localTime
-                print statusString
+                print(statusString)
                 self.logFh.write(statusString+'\n')
                 self.logFh.flush()
             except:
                 localTime = time.strftime("%m/%d/%y %H:%M:%S", time.localtime())
                 statusString = 'step 3.  failed refining the parent ion masses!! %s' % localTime
-                print statusString
+                print(statusString)
                 self.logFh.write(statusString+'\n')
                 self.logFh.flush()
                 self.logFh.close()
@@ -413,19 +413,19 @@ class Controller:
             #create updated file
             try:
                 statusString = "step 4.  updating the dta file"
-                print statusString
+                print(statusString)
                 self.logFh.write(statusString+'\n')
                 self.logFh.flush()
                 #--------------------
                 do_createFixedDtaFile( dtaFile, fixedDtaEntryLines)#----------
                 #--------------------
                 statusString = "step 4.  done updating the dta file"
-                print statusString
+                print(statusString)
                 self.logFh.write(statusString+'\n')
                 self.logFh.flush()
             except:
                 statusString = "step 4.  failed updating the dta file!"
-                print statusString
+                print(statusString)
                 self.logFh.write(statusString+'\n')
                 self.logFh.flush()
                 continue
@@ -434,7 +434,7 @@ class Controller:
             executionTime = time.strftime("%HH:%MM:%SS",time.gmtime(toc-tic))
             statusString = 'finished refining %s \nin %s' % (dtaFile, executionTime)
             statusString = '-'*20 +'\n'+ statusString
-            print statusString
+            print(statusString)
             self.logFh.write(statusString+'\n')
             self.logFh.flush()
             
@@ -448,7 +448,7 @@ class Controller:
             statusString += 'Exp. Max. estimate\t%s\t%s\n' % (round(temp['mean'],2), round(temp['stdev'],2))
             temp = self.statPars['ori']['Robust']
             statusString += 'Robust estimate\t\t%s\t%s\n' % (round(temp['mean'],2), round(temp['stdev'],2))
-            print statusString
+            print(statusString)
             self.logFh.write(statusString+'\n')
             self.logFh.flush()
             #
@@ -458,7 +458,7 @@ class Controller:
             statusString += 'Exp. Max. estimate\t%s\t%s\n' % (round(temp['mean'],2), round(temp['stdev'],2))
             temp = self.statPars['new']['Robust']
             statusString += 'Robust estimate\t\t%s\t%s\n' % (round(temp['mean'],2), round(temp['stdev'],2))
-            print statusString
+            print(statusString)
             self.logFh.write(statusString+'\n')
             self.logFh.flush()
 
@@ -484,7 +484,7 @@ class Controller:
                 sc.Init("R")
             except:
                 statusString = 'Can not find R(D)COM server!\nPlease install R(D)COM or use another regression approach.'
-                print statusString
+                print(statusString)
                 self.logFh.write(statusString+'\n')
                 self.logFh.flush()
                 self.logFh.close()

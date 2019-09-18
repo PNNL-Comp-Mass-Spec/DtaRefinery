@@ -1,5 +1,5 @@
 from numpy import array, lexsort, where, vstack, ceil, average, median
-from my_runmed import runmed
+from aux_sys_err_prediction_module.additive.numpy_runmed_spline.my_runmed import runmed
 from scipy.interpolate import splev, splrep
 import time
 import psyco

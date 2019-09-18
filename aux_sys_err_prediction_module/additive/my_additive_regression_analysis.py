@@ -6,7 +6,7 @@ import random
 psyco.full()
 
 #
-from my_1D_regression_analysis import do_1D_regression_analysis
+from aux_sys_err_prediction_module.additive.my_1D_regression_analysis import do_1D_regression_analysis
 #
 
 from numpy import log, array, median, zeros
@@ -124,7 +124,7 @@ def do_split_inputs( xTandemInput, dtaInput, K):
         holder[x][0] = fetch_full_data( holder[x][0], xTandemInput)
         holder[x][1] = fetch_full_data( holder[x][1], dtaInput)
 
-##    print 'done splitting the dataset for overfitting proof mode'
+##    print('done splitting the dataset for overfitting proof mode')
     return holder
             
 
@@ -230,11 +230,11 @@ def do_additive_regression_analysis( Controller, xTandemInput, dtaInput):
 
             # 1D REGRESSION IS HERE
             statusString = '\tstarting regression. %s pass, %s parameter...' % (count, key)
-            print statusString
+            print(statusString)
             logFh.write(statusString+'\n')
             logFh.flush()
             resultVals = do_1D_regression_analysis( ARG3, Controller) # ARG3 is split into K pieces if overfit proof mode is enabled
-##            print ' got through 1D regression'
+##            print(' got through 1D regression')
             # resultVals is a list with the order
             # 'isSuccessfulFit', 'predErr' prediction error MSE?, 'ppmArrs'
 

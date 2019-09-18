@@ -160,7 +160,7 @@ def lowess(x, y, X2, f=2./3., itr=3):
             delta = delta*delta
 
         except LinAlgError:
-            #print "    got the singularity problem"
+            #print("    got the singularity problem")
             break
         else:
             #updates only if passes the loop without a problem
@@ -210,7 +210,7 @@ if __name__ == '__main__':
     tic_1 = tic()
     bY = lowess(x, y, b, f=0.20, itr=1)
     tic_2 = tic()
-    print 'done in %s seconds' % (tic_2-tic_1)
+    print('done in %s seconds' % (tic_2-tic_1))
 
     subplot(211)
     plot(x,y,'bo')

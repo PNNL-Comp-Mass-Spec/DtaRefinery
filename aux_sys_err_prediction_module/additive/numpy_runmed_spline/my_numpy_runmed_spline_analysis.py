@@ -1,4 +1,4 @@
-from my_runmed_spline import runmed_spline_model
+from aux_sys_err_prediction_module.additive.numpy_runmed_spline.my_runmed_spline import runmed_spline_model
 from numpy import random, array, median, where, zeros, average, hstack
 from scipy.interpolate import splev
 import time
@@ -163,7 +163,7 @@ if __name__ == '__main__':
     isSuccessfulFit, yFit, yEval, runMedData, predErr = \
                      runmed_spline_MAIN(x1,y1,x1, runMedSpan=0.01, K=10, bisections=10, adj=0)
     t2 = c()
-    print 'done ins %s seconds' % (t2-t1)
+    print('done ins %s seconds' % (t2-t1))
 
 
     subplot(211)

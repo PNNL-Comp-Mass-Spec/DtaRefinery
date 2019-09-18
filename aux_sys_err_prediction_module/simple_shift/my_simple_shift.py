@@ -1,6 +1,6 @@
 from numpy import array, median, zeros
 from pylab import plot, hist, subplot, show, xlim, axvline
-from my_em_gfg_function import do_em_norm_n_fixed_norm
+from aux_sys_err_prediction_module.simple_shift.my_em_gfg_function import do_em_norm_n_fixed_norm
 from pprint import pprint as p
 
 myName = 'simple shift'
@@ -39,11 +39,11 @@ def do_simple_shift( Controller, xTandemInput, dtaInput):
     dtaPpm = zeros(dta.shape[0],'d')
 
     #choose the approach
-##    approaches = [i for i in params.keys() if params[i].has_key('do')]
+##    approaches = [i for i in params.keys() if 'do' in params[i]]
 ##    approachToUseNameBool = [params[i]['do'] for i in approaches]
 ##    #---check if there is only one True
 ##    if sum(approachToUseNameBool) != 1:
-##        print "Something wrong in parameter input"
+##        print("Something wrong in parameter input")
 ##    approachToUseName = approaches[approachToUseNameBool.index(True)]        
     #---get the approach function
     approachToUseName = Controller.updatedSettings['refiningPars']['choices']['simpleShift']

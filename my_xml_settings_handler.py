@@ -5,18 +5,18 @@ import copy
 
 def extendDict(path, d):
     key = path[0]
-    if not d.has_key(key):
+    if not key in d:
         d[str(key)] = {}
     path = path[1:]
     if len(path) > 0:
         return extendDict(path, d[key])
 
 
-def addToDict(path, finalDict, (label, data)):
+def addToDict(path, finalDict, label, data):
     key = path[0]
     path = path[1:]
     if path != []:
-        return addToDict(path, finalDict[key], (label, data))
+        return addToDict(path, finalDict[key], label, data)
     else:
         finalDict[str(key)][str(label)] = data
         return finalDict
@@ -47,7 +47,7 @@ def getPaths(paths, finalDict, mainNode):
                     else:
                         data = ''
                     #get to that node in dictionay
-                    finaDict = addToDict(path, finalDict, (label, data))
+                    finaDict = addToDict(path, finalDict, label, data)
                         
 
 
@@ -57,7 +57,8 @@ def getSettingsFromXML(xmlFileName):
     finalDict = {}
     getPaths(paths, finalDict, xmlDoc)
     #removes the first layer of allPars
-    return finalDict[finalDict.keys()[0]]
+    firstKey = next(iter(finalDict))
+    return finalDict[firstKey]
 
 
 

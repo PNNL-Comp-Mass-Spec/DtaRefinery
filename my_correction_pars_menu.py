@@ -17,16 +17,16 @@ class CorrectionParsMenu(wx.Menu):
         self.addRegSubmenu_SseSplineItem        = addRegSubmenu.AppendCheckItem(-1, '&MSE restricted spline')
         self.addRegSubmenu_PenSecDerSplineItem  = addRegSubmenu.AppendCheckItem(-1, '&spline with penalized second derivative')
         self.addRegSubmenu_LowessItem           = addRegSubmenu.AppendCheckItem(-1, '&lowess')
-        self.AppendMenu(-1, '&Additive Regressions', addRegSubmenu)
+        self.Append(-1, '&Additive Regressions', addRegSubmenu)
 
         simpleShiftSubmenu = wx.Menu()
         self.simpleShiftSubmenu_MedianItem   = simpleShiftSubmenu.AppendCheckItem(-1, 'shift by mean est. as &median')
         self.simpleShiftSubmenu_EmItem       = simpleShiftSubmenu.AppendCheckItem(-1, 'shift by mean est. using &EM')
-        self.AppendMenu(-1, '&Simple Shift', simpleShiftSubmenu)
+        self.Append(-1, '&Simple Shift', simpleShiftSubmenu)
 
         bypassRefiningSubmenu = wx.Menu()
         self.bypassRefiningSubmenu_Item = bypassRefiningSubmenu.AppendCheckItem(-1, '&bypass refining')
-        self.AppendMenu(-1, '&Bypass Refining', bypassRefiningSubmenu)
+        self.Append(-1, '&Bypass Refining', bypassRefiningSubmenu)
 
         self.AppendSeparator()
 
@@ -87,7 +87,7 @@ class CorrectionParsMenu(wx.Menu):
         elif refiningMethod == 'bypassRefining':
             self.bypassRefiningSubmenu_Item.Check(True)
         else:
-            raise Exception, 'can not recognize method name'
+            raise Exception('can not recognize method name')
 
 
 

@@ -159,7 +159,7 @@ def do_plot_final_hist( Controller, xTandemInput, xtPpmNew, isFinalPlots):
 
 
     # some info in the bottom left corner
-    finePrint = 'dataset: %s\ntotal number of identifications: %s\nbin size: %s ppm'\
+    fineprint = 'dataset: %s\ntotal number of identifications: %s\nbin size: %s ppm'\
                 % (dSetName, len(xTandemInput), binSize)
     t = gcf().text(0.05, 0.075, finePrint,
                    horizontalalignment='left',
@@ -219,9 +219,9 @@ def do_plot_final_hist( Controller, xTandemInput, xtPpmNew, isFinalPlots):
             par = array([float(i[ind]) for i in xTandemInput[1:]])
             #
             # some info in the bottom left corner
-            finePrint = 'dataset: %s'\
+            fineprint = 'dataset: %s'\
                         % (dSetName)
-            t = gcf().text(0.05, 0.075, finePrint,
+            t = gcf().text(0.05, 0.075, fineprint,
                            horizontalalignment='left',
                            verticalalignment='top',
                            fontproperties=FontProperties(size=6))

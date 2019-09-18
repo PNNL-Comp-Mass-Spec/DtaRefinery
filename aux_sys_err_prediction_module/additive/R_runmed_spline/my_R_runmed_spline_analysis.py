@@ -1,4 +1,4 @@
-from my_R_runmed_spline_fit import R_runmed_smooth_spline
+from aux_sys_err_prediction_module.additive.R_runmed_spline.my_R_runmed_spline_fit import R_runmed_smooth_spline
 from numpy import random, array, median, where, zeros, average, arange, hstack
 from scipy.interpolate import splev
 from pylab import plot, show, subplot, savefig, clf, ylim
@@ -84,7 +84,7 @@ def R_runmed_spline_KCV_OPTIMIZATION(x, y, sc, **pars):
 
 ##    p(zip(sparSet, predErrSet))
     spar = sparSet[predErrSet == min(predErrSet)][-1] #take the last one (smoothest) if there are few
-##    print 'spar ', spar
+##    print('spar ', spar)
 
     return spar
 #-----------------------------------------------------------------------            
@@ -162,7 +162,7 @@ if __name__ == '__main__':
     isSuccessfulFit, yFit, yEval, runMedData, predErr = \
                      R_runmed_spline_MAIN(x1,y1,x1, runMedSpan=0.01, K=10, sparRange=[0.6,1.1,0.1])
     t2 = c()
-    print 'done in %s seconds' % (t2-t1)
+    print('done in %s seconds' % (t2-t1))
 
 
     subplot(211)

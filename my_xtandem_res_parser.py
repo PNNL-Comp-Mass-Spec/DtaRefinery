@@ -16,7 +16,7 @@ def do_parse_XTandemXmlOutput(fileName):
         groupModelElements = [x for x in biomlElement.childNodes if\
                               (x.nodeName == 'group' and x.getAttribute('type') == 'model')]
     except:
-        print 'Error! Something wrong with XML file format (1)'
+        print('Error! Something wrong with XML file format (1)')
 
     #getting
     #<group type='support'>

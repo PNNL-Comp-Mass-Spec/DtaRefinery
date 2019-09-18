@@ -248,10 +248,10 @@ class App(wx.App):
 def mainFromGUI( dtaRefineryDir):
     defaultSettingsFile = os.path.join( dtaRefineryDir, 'default_settings.xml')
     if not os.path.exists(defaultSettingsFile):
-        print '\n'
-        print 'INPUT ERROR!'
-        print 'the default settings file %s' % defaultSettingsFile
-        print 'does not exists!\n'
+        print('\n')
+        print('INPUT ERROR!')
+        print('the default settings file %s' % defaultSettingsFile)
+        print('does not exists!\n')
         raise Exception
     app = App( dtaRefineryDir)
     app.MainLoop()
@@ -260,22 +260,22 @@ def mainFromGUI( dtaRefineryDir):
 def mainFromCommandLine( dtaRefineryDir, settingFile, cdtaFile, fastaFile):
 
     if not os.path.exists(settingFile):
-        print '\n'
-        print 'INPUT ERROR!'
-        print 'the specified settings file %s' % settingFile
-        print 'does not exists!\n'
+        print('\n')
+        print('INPUT ERROR!')
+        print('the specified settings file %s' % settingFile)
+        print('does not exists!\n')
         raise Exception
     if not os.path.exists(cdtaFile):
-        print '\n'
-        print 'INPUT ERROR!'        
-        print 'the specified cdta file %s' % cdtaFile
-        print 'does not exists!\n'
+        print('\n')
+        print('INPUT ERROR!'        )
+        print('the specified cdta file %s' % cdtaFile)
+        print('does not exists!\n')
         raise Exception
     if not os.path.exists(fastaFile):
-        print '\n'
-        print 'INPUT ERROR!'        
-        print 'the specified fasta file %s' % fastaFile
-        print 'does not exists!\n'
+        print('\n')
+        print('INPUT ERROR!'        )
+        print('the specified fasta file %s' % fastaFile)
+        print('does not exists!\n')
         raise Exception
        
     controller = Controller( dtaRefineryDir)
@@ -296,6 +296,6 @@ if __name__ == "__main__":
         dtaRefineryDir = os.path.dirname(sys.argv[0])
         mainFromGUI( dtaRefineryDir)
     else:
-        print 'wrong number of arguments'
+        print('wrong number of arguments')
     
 	

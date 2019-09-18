@@ -70,8 +70,8 @@ if __name__ == '__main__':
     dlg = RegressionParsDialog('some pars')
     result = dlg.ShowModal()
     if result == wx.ID_OK:
-        print 'OK'
+        print('OK')
     else:
-        print 'Cancel'
-        print dlg.pars 
+        print('Cancel')
+        print(dlg.pars )
     dlg.Destroy()

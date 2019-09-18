@@ -55,5 +55,5 @@ if __name__ == '__main__':
     logFileName = 'VP1P156_A-b_18Dec06_Draco_06-07-10fst2_DeconMSn_log.txt'
     profileFileName = 'VP1P156_A-b_18Dec06_Draco_06-07-10fst2_profile.txt'
     x = getAuxInfo(logFileName, profileFileName)
-    print x['3198']
+    print(x['3198'])
 

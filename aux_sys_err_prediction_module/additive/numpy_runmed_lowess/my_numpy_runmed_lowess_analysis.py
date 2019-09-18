@@ -1,4 +1,4 @@
-from my_runmed_lowess import runmed_lowess_model
+from aux_sys_err_prediction_module.additive.numpy_runmed_lowess.my_runmed_lowess import runmed_lowess_model
 from numpy import random, array, median, where, zeros, average, hstack
 from scipy.interpolate import splev
 import time

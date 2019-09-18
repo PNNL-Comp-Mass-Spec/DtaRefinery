@@ -37,7 +37,7 @@ def R_runmed_smooth_spline(x, y, xFit, **kwargs):
 
     #sc.Close()
 
-##    print 'R_runmed_smooth_spline done in %s seconds' % (t2-t1)
+##    print('R_runmed_smooth_spline done in %s seconds' % (t2-t1))
 
     return yFit, (xRmd, yRmd)
 
@@ -83,7 +83,7 @@ if __name__ == '__main__':
     #spar range 0.6 .. 1.2
     yFit, runMed = R_runmed_smooth_spline(x,y,x,runMedSpan=0.1,spar=0.6,sc=sc)
     tic_2 = c()
-    print 'done in %s seconds' % (tic_2-tic_1)
+    print('done in %s seconds' % (tic_2-tic_1))
 
     sc.Close()
 

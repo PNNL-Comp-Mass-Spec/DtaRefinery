@@ -1,6 +1,6 @@
 
-from additive.my_additive_regression_analysis import do_additive_regression_analysis as additive_approach
-from simple_shift.my_simple_shift import do_simple_shift as simple_shift
+from aux_sys_err_prediction_module.additive.my_additive_regression_analysis import do_additive_regression_analysis as additive_approach
+from aux_sys_err_prediction_module.simple_shift.my_simple_shift import do_simple_shift as simple_shift
 #
 
 from pprint import pprint as p
