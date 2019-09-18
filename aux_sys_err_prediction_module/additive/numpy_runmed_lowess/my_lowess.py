@@ -179,7 +179,7 @@ if __name__ == '__main__':
     from pprint import pprint as p
     import csv
     from pylab import plot, subplot, ylim, show
-    import psyco
+    #import psyco
     from time import clock as tic
 ##    psyco.full()
    

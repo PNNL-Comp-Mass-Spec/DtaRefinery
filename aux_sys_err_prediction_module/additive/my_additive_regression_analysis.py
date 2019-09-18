@@ -1,9 +1,9 @@
 from pprint import pprint as p
-import psyco
+#import psyco
 import os.path
 import copy
 import random
-psyco.full()
+#psyco.full()
 
 #
 from aux_sys_err_prediction_module.additive.my_1D_regression_analysis import do_1D_regression_analysis
