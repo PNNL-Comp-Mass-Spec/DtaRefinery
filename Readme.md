@@ -72,7 +72,9 @@ dta_refinery.exe [setting file (xml)] [concatenated dta file (_dta.txt)] [FASTA 
 ### Running via Python 3.x
 
 Install the wx package:
-```pip install wxPython```
+```pip install numpy matplotlib pandas
+pip install wxPython
+```
 
 Call python.exe with the dta_refinery.py followed by options
 ```python.exe dta_refinery.py```
