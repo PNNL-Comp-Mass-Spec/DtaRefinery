@@ -1,5 +1,5 @@
 from aux_sys_err_prediction_module.additive.numpy_runmed_spline.my_runmed_spline import runmed_spline_model
-from numpy import random, array, median, where, zeros, average, hstack
+from numpy import random, array, median, zeros, average, hstack
 
 myName = 'numpy_runmed_spline'
 useMAD = True #Use median absolute deviation instead of sum of squared residuals

@@ -1,5 +1,5 @@
 from aux_sys_err_prediction_module.additive.R_runmed_spline.my_R_runmed_spline_fit import R_runmed_smooth_spline
-from numpy import random, array, median, where, zeros, average, arange, hstack
+from numpy import random, array, median, zeros, arange, hstack
 
 from win32com.client import Dispatch
 

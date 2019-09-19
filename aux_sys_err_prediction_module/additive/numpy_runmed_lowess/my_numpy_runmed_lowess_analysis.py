@@ -1,10 +1,6 @@
 from aux_sys_err_prediction_module.additive.numpy_runmed_lowess.my_runmed_lowess import runmed_lowess_model
-from numpy import random, array, median, where, zeros, average, hstack
-from scipy.interpolate import splev
-import time
+from numpy import random, array, median, hstack
 import math
-
-from pylab import plot, show, subplot, savefig, clf, ylim
 
 myName = 'numpy_runmed_lowess'
 useMAD = True #use median absolute deviation instead for sum of squared residuals for prediction error estimation
