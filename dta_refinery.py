@@ -6,7 +6,7 @@ from my_correction_pars_menu import CorrectionParsMenu
 from my_other_sets_menu import OtherSetsMenu
 from my_xml_settings_handler import writeSettingsToXML
 
-__VERSION__ = '1.3'
+__VERSION__ = '1.4'
 
 class MainFrame(wx.Frame):
     def __init__(self, dtaRefineryDir):

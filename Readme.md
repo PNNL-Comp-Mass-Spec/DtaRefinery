@@ -30,44 +30,42 @@ m/z, ion intensity, and total ion current.
 
 ## Example Data included with the Installer
 
-Included with the DTARefinery is a test dataset based on a typical mouse brain 
-LC-MS/MS dataset obtained on an LTQ-Obritrap intrument. The ".raw" file was 
-processed with DeconMSn. The following example files (installed at C:\Program 
-Files\DtaRefinery\examples) are included for you to explore the DtaRefinery's 
-functionality:
+Included with the DtaRefinery is a test dataset based on a typical mouse brain 
+LC-MS/MS dataset obtained on an LTQ-Obritrap intrument. The Thermo .raw file was 
+processed with DeconMSn to create test_dta.txt. Explore DtaRefinery's functionality 
+using the example files available at https://github.com/PNNL-Comp-Mass-Spec/DtaRefinery/Example_Data/MouseVoxel
 
 1) test_dta.txt
   * A concatenated dta file from DeconMSn
+  * Unzip prior to using
 2) test_DeconMSn_log.txt
   * The DeconMSn log file
 3) test_profile.txt
   * The DeconMSn profile file
-4) ipiMOUSEv328.fasta
-  * The mouse IPI v3.28 FASTA (from 
-ftp://ftp.ebi.ac.uk/pub/databases/IPI/old/HUMAN)
+4) M_musculus_Uniprot_SPROT_2019-09-19.fasta
+  * Swiss-Prot mouse proteins from https://www.uniprot.org/uniprot/?query="mus%20musculus"&fil=reviewed%3Ayes
 5) *.bat
-  * Command line batch files demonstrating various methods for improving mass measurement error (each invokes the application from the command line)
+  * Command line batch files demonstrating various methods for improving mass measurement error (each invokes the DtaRefinery from the command line)
+  * Before using, customize the path to python.exe in the batch files
 6) *.xml
   * Corresponding XML settings files for the batch files
 
 ## Using DtaRefinery
 
 The program can be run either in an interactive (GUI) mode or via the command 
-line. To use the GUI, simply run the application from the start menu or by 
-double clicking dta_refinery.exe. Simple steps to get started:
+line. To use the GUI, simply run the application without any parameters, for example
+```C:\ProgramData\Anaconda3\python.exe dta_refinery.py 
+```
 
-1) Choose "File -> dta Files..."  to load concatenated dta files
-2) Choose "File -> FASTA File..." to load FASTA file
+Simple steps to get started:
+
+1) Choose "File -> dta Files..." to load concatenated dta files
+2) Choose "File -> FASTA File..." to load the FASTA file
 3) The settings can be loaded with "File -> Load Settings File...", or by 
 choosing the "Error Correction Params" and "Misc Settings" menus.
 4) Click Run
 
 ## Command line Syntax
-
-### Compiled Executable
-
-dta_refinery.exe [setting file (xml)] [concatenated dta file (_dta.txt)] [FASTA file]
-
 
 ### Running via Python 3.x
 
@@ -78,6 +76,11 @@ pip install wxPython
 
 Call python.exe with the dta_refinery.py followed by options
 ```python.exe dta_refinery.py```
+
+
+### Compiled Executable (deprecated)
+
+dta_refinery.exe [setting file (xml)] [concatenated dta file (_dta.txt)] [FASTA file]
 
 
 ## DtaRefinery Output files
@@ -93,39 +96,47 @@ Call python.exe with the dta_refinery.py followed by options
 * _HIST.txt
   * histogram data as in *_HIST.png file, but in text format
 
-Scatterplots showing mass measurement error residuals dependencies on:
- * scan number: _scanNum.png
- * m/z: _mz.png
- * log10 of ion intensity in the ICR/Orbitrap cell: _logTrappedIonInt.png
- * total ion current in the ICR/Orbitrap cell: _trappedIonsTIC.png
+Scatter plots showing mass measurement error residuals, plotted vs::
+
+| File                  | Description                                     |
+|-----------------------|-------------------------------------------------|
+| _scanNum.png          | scan number                                     |
+| _mz.png               | m/z                                             |
+| _logTrappedIonInt.png | log10 of ion intensity in the ICR/Orbitrap cell |
+| _trappedIonsTIC.png   | total ion current in the ICR/Orbitrap cell      |
+ 
  
 ## Revision History
 
-### Changes in version 1.3 (2010.04.26)
+### Changes in version 1.4 (2019-09-19)
 
-1) Now reads the _DeconMSn_log.txt and profile.txt files created by DeconMSn
+* Update to Python 3.x
+* Show additional messages at the console
 
+### Changes in version 1.3 (2010-04-26)
 
-### Changes in version 1.2 (2010.02.16)
+* Now reads the _DeconMSn_log.txt and profile.txt files created by DeconMSn
 
-1) Fixed problem in parsing dta file when MH value of parent
+### Changes in version 1.2 (2010-02-16)
+
+* Fixed problem in parsing dta file when MH value of parent
 ion was an number without decimal positions.
-2) Display and print out version number in the log file
-3) Switch to simple shift from additive regression only
+* Display and print out version number in the log file
+* Switch to simple shift from additive regression only
 if additive regression was selected as the method of choice.
-4) (2010.04.26) Flush the buffer after each log into the log file.
+* (2010.04.26) Flush the buffer after each log into the log file.
 This updates the programs running status more frequently.
 
-### Changes in version 1.1 (2010.01.11)
+### Changes in version 1.1 (2010-01-11)
 
-1) Fixed ValueError problem with very large dataset refinement
-2) Added option for analysis of non-trytic digests
-3) Added widget for showing the refinement method
-4) Fixed the "bypass refinement" method
-5) Allowed 1 missed clevage event in case the cleavage specificity.
+* Fixed ValueError problem with very large dataset refinement
+* Added option for analysis of non-tryptic digests
+* Added widget for showing the refinement method
+* Fixed the "bypass refinement" method
+* Allowed 1 missed cleavage event in case the cleavage specificity.
 In the case of no enzyme rule digest, the number of missed cleavages
 goes up to 50.
-6) The default settings now includes static alkylation of cystein and 
+* The default settings now includes static alkylation of cystein and 
 trypsin cleavage specificity.
 
 ## Contacts
@@ -137,6 +148,6 @@ Website: https://omics.pnl.gov/ or https://panomics.pnnl.gov/
 
 ## License
 
-DTARefinery is licensed under the 2-Clause BSD License; you may not use 
+DtaRefinery is licensed under the 2-Clause BSD License; you may not use 
 this file except in compliance with the License. You may obtain 
 a copy of the License at https://opensource.org/licenses/BSD-2-Clause
