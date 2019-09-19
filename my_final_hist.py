@@ -6,17 +6,15 @@ from numpy import log, array, median, zeros, arange, pi, exp, vstack, savetxt, a
 from pylab import plot, grid, axhline,\
                  ylim, show, subplot, clf,\
                  savefig, hist, xlabel, ylabel,\
-                 title, text, xlim, subplots_adjust,\
+                 title, xlim, subplots_adjust,\
                  savefig, gcf, figure
 
 from matplotlib.font_manager import FontProperties
 
-
+from matplotlib.text import Text
 
 def dnorm(x, m, s):
     return (1/(s*(2*pi)**0.5))*exp(-(x-m)**2/(2*s**2))
-
-
 
 def bothScatterPlots( par, xtPpmOld, xtPpmNew, lims, dim):
 
@@ -67,52 +65,57 @@ def subHist(*args):
     plot(bins, totalMAD,  'c--', linewidth=1.5)    
     grid()
     xlim(lims)
-    pars = '      EM est.\nmean = %s\nstdev = %s' % (round(mean,2), round(stdev,2))
-    text(0.66, 0.9, pars,\
-         fontsize=10,\
-         horizontalalignment='left',\
-         verticalalignment='center',\
-         transform = sbPlt.transAxes,\
-         bbox = dict(facecolor='#EEEEEE',\
-                     edgecolor='#EEEEEE',\
-#                     width = 130,\
-                     pad = 5,\
+    
+    emStats = '      EM est.\nmean = %s\nstdev = %s' % (round(mean,2), round(stdev,2))
+    Text(0.66, 0.9, emStats,
+         fontsize=10,
+         horizontalalignment='left',
+         verticalalignment='center',
+         transform = sbPlt.transAxes,
+         bbox = dict(facecolor='#EEEEEE',
+                     edgecolor='#EEEEEE',
+                     # Cannot set width like this; doing so results in a duplicate dictionary key error
+                     # width = 130,
+                     pad = 5,
                      alpha=0.85))
 
-    pars = '      Robust est.\nmean = %s\nstdev = %s' % (round(meanMAD,2), round(stdevMAD,2))
-    text(0.66, 0.74, pars,\
-         fontsize=10,\
-         horizontalalignment='left',\
-         verticalalignment='center',\
-         transform = sbPlt.transAxes,\
-         bbox = dict(facecolor='#EEEEEE',\
-                     edgecolor='#EEEEEE',\
-#                     width = 130,\
-                     pad = 5,\
+    robustStats = '      Robust est.\nmean = %s\nstdev = %s' % (round(meanMAD,2), round(stdevMAD,2))
+    Text(0.66, 0.74, robustStats,
+         fontsize=10,
+         horizontalalignment='left',
+         verticalalignment='center',
+         transform = sbPlt.transAxes,
+         bbox = dict(facecolor='#EEEEEE',
+                     edgecolor='#EEEEEE',
+                     # Cannot set width like this; doing so results in a duplicate dictionary key error
+                     # width = 130,
+                     pad = 5,
                      alpha=0.85))
 
-    text(0.66, 0.945, '---',\
-         color = 'red',\
-         fontsize=16,\
-         horizontalalignment='left',\
-         verticalalignment='center',\
-         transform = sbPlt.transAxes,\
-         bbox = dict(facecolor='#EEEEEE',\
-                     edgecolor='#EEEEEE',\
-#                     width = 130,\
-                     pad = 5,\
+    Text(0.66, 0.945, '---',
+         color = 'red',
+         fontsize=16,
+         horizontalalignment='left',
+         verticalalignment='center',
+         transform = sbPlt.transAxes,
+         bbox = dict(facecolor='#EEEEEE',
+                     edgecolor='#EEEEEE',
+                     # Cannot set width like this; doing so results in a duplicate dictionary key error
+                     # width = 130,
+                     pad = 5,
                      alpha=0.0))
 
-    text(0.66, 0.785, '---',\
-         color = 'cyan',\
-         fontsize=16,\
-         horizontalalignment='left',\
-         verticalalignment='center',\
-         transform = sbPlt.transAxes,\
-         bbox = dict(facecolor='#EEEEEE',\
-                     edgecolor='#EEEEEE',\
-#                     width = 130,\
-                     pad = 5,\
+    Text(0.66, 0.785, '---',
+         color = 'cyan',
+         fontsize=16,
+         horizontalalignment='left',
+         verticalalignment='center',
+         transform = sbPlt.transAxes,
+         bbox = dict(facecolor='#EEEEEE',
+                     edgecolor='#EEEEEE',
+                     # Cannot set width like this; doing so results in a duplicate dictionary key error
+                     # width = 130,
+                     pad = 5,
                      alpha=0.0))
 
     if title == 'refined':
@@ -127,9 +130,6 @@ def subHist(*args):
     # is backward
     # result[0] is bin count data 
     return sbPlt.get_ylim(), result[0]
-
-
-
 
 def do_plot_final_hist( Controller, xTandemInput, xtPpmNew, isFinalPlots):
 
