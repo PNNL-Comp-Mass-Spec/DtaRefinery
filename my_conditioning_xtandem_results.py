@@ -71,17 +71,8 @@ def do_combine_xtandemRes_n_log_n_profile_file( xTandemRes, logFileName, profile
                'trappedIonsTIC',
                'massErrorPpm']]
 
-    dataOut = header + list(dataOut)
-    return dataOut
-
-
-
-
-
-
-
-
-
+    dataWithHeader = header + list(dataOut)
+    return dataWithHeader
 
 def do_reformat_xtandemRes( xTandemRes):
 
@@ -100,24 +91,11 @@ def do_reformat_xtandemRes( xTandemRes):
                'mz',
                'massErrorPpm']]
 
-    dataOut = header + list(dataOut)
-    return dataOut
-
-
-
-
-
-
-
-
-
-
+    dataWithHeader = header + list(dataOut)
+    return dataWithHeader
 
 ####################################################################
 if __name__ == '__main__':
     import shelve
     arc = shelve.open('xTandemRes.shlv')
     xTandemRes = arc['xTandemRes']
-    
-
-
