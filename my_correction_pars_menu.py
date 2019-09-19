@@ -89,7 +89,7 @@ class CorrectionParsMenu(wx.Menu):
         else:
             raise Exception('can not recognize method name')
 
-    # here goes the responces
+    # here goes the responses
     def OnAddRegSubmenu_SseSpline(self, evt):
         # TUNE THE PARAMS OF numpy_runmed_spline
         # is overfit proof?
