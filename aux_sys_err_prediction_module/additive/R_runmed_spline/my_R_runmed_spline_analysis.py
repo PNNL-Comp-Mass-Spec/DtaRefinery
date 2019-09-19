@@ -2,6 +2,7 @@ from aux_sys_err_prediction_module.additive.R_runmed_spline.my_R_runmed_spline_f
 from numpy import random, array, median, zeros, arange, hstack
 
 from win32com.client import Dispatch
+import math
 
 myName = 'R_runmed_spline'
 useMAD = True  # use median absolute deviations instead of sum of squared residues
@@ -97,8 +98,8 @@ def R_runmed_spline_KCV_predErr(x, y, **kwargs):
     # --Related to K-fold CV---------------------------
     L = len(x)
     N = L / K  ##min length of pieces
-    W = range(L)
-    Z = range(1, K + 1)
+    W = list(range(L))
+    Z = list(range(1, K + 1))
     Z = [N for j in Z]
     R = L % K
     Z[0:R] = [j + 1 for j in Z[0:R]]  # length of the pieces
@@ -108,7 +109,9 @@ def R_runmed_spline_KCV_predErr(x, y, **kwargs):
     allResiduals = array([])
     SSE = sum(y ** 2)  # VLAD. Why do I need this???
     # ---running through K training/testings-------------
-    for j in Z:
+    for val in Z:
+        j = math.floor(val)
+
         # ---making training/testing subsets-------------
         test = W[ind:ind + j]
         test.sort()

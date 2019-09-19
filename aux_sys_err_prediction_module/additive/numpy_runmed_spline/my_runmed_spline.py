@@ -12,10 +12,10 @@ def runmed_spline_model(x, y, xFit, **kwargs):
 
     # removing redundant entries
     tA = zip(x, y)
-    utA = dict.fromkeys(tA).keys()
+    utA = list(dict.fromkeys(tA).keys())
     uA = array(utA)
 
-    # sorting by (1) parameter and (2) responce
+    # sorting by (1) parameter and (2) response
     iuA = lexsort(keys=(uA[:, 1], uA[:, 0]))
     uA = uA[iuA, :]
 
@@ -29,9 +29,21 @@ def runmed_spline_model(x, y, xFit, **kwargs):
 
     # runmed may result in non-uniques
     # So group Scans and take averages along yRunMed
-    unqScans = array(dict.fromkeys(uA[:, 0]).keys())
+    unqScans = array(list(dict.fromkeys(uA[:, 0]).keys()))
 
-    avgErr = array([median(yRunMed[where(uA[:, 0] == i)].T) for i in unqScans])
+    avgErrList = []
+
+    for i in unqScans:
+        matchingData = where(uA[:, 0] == int(i))
+        if len(matchingData) == 0:
+            print("No matches for scan ", i)
+            continue
+
+        runMedResult = yRunMed[matchingData]
+        medianValue = median(runMedResult.T)
+        avgErrList.append(medianValue)
+
+    avgErr = array(avgErrList)
 
     # ordering
     ind = lexsort(keys=(avgErr, unqScans))

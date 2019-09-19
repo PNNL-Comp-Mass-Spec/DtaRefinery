@@ -67,9 +67,9 @@ def runmed_lowess_KCV_predErr(x, y, **params):
     # --Related to K-fold CV---------------------------
     L = len(x)
     N = L / K  ##min length of pieces
-    W = [i for i in range(L)]
+    W = list(range(L))
 
-    Z = range(1, K + 1)
+    Z = list(range(1, K + 1))
     Z = [N for j in Z]
     R = L % K
     Z[0:R] = [j + 1 for j in Z[0:R]]  # length of the pieces
@@ -81,15 +81,15 @@ def runmed_lowess_KCV_predErr(x, y, **params):
     MAD = median(abs(y))
     SSE = MAD  # same fix as above. VLAD
     # ---running through K training/testings-------------
-    for j in Z:
-        jInt = math.floor(j)
+    for val in Z:
+        j = math.floor(val)
 
         # ---making training/testing subsets-------------
-        test = W[ind:ind + jInt]
+        test = W[ind:ind + j]
         test.sort()
-        train = W[0:ind] + W[ind + jInt:]
+        train = W[0:ind] + W[ind + j:]
         train.sort()
-        ind += jInt
+        ind += j
         # -----------------------------------------------
 
         # ---fit runmed_spline here----------------------

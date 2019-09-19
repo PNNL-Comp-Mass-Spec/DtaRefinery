@@ -9,20 +9,20 @@ def runmed(x, NN):
     if NN % 2 == 0:
         raise Exception("Error in runmed. Use odd NN")
 
-    k = (NN + 1) / 2
+    k = int((NN + 1) / 2)
     sm = x.copy()
     n = len(x)
     # first look, filling middle
     nachalo = k
     konec = n - k
-    nabor = range(nachalo, konec)
+    nabor = list(range(nachalo, konec))
     smMid = [median(x[(i - k):(i + k + 1)]) for i in nabor]
     sm[nabor] = array(smMid)
     # second loop to fill k-flanks, except 1 & n
-    flangBegIndx = range(1, nachalo)
+    flangBegIndx = list(range(1, nachalo))
     smBeg = [median(x[0:i * 2 + 1]) for i in flangBegIndx]
     sm[flangBegIndx] = smBeg
-    flangEndIndx = range(konec, n - 1)
+    flangEndIndx = list(range(konec, n - 1))
     smEnd = [median(x[2 * i - n + 1:n]) for i in flangEndIndx]
     sm[flangEndIndx] = smEnd
     # filling 1 & n elements
