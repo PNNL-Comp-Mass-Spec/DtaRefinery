@@ -1,4 +1,4 @@
-# this is a speed up version of dta paser
+# This is a speed up version of dta parser
 # see the earlier versions for other parser
 # from ver 1.05
 

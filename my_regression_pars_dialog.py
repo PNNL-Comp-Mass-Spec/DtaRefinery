@@ -1,10 +1,11 @@
 import wx
 
+
 class RegressionParsDialog(wx.Dialog):
     def __init__(self, pars):
         wx.Dialog.__init__(self, None, -1,
-                           'Regression Parsmeters',
-                           size=(400,400))
+                           'Regression Parameters',
+                           size=(400, 400))
         self.pars = pars
 
         # buttons
