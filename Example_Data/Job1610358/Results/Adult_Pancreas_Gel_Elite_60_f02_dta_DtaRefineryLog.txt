@@ -1,14 +1,17 @@
-DtaRefinery 1.3
+DtaRefinery 1.4
 
 Using X!Tandem at:
-  C:\DMS_Programs\DtaRefinery\aux_xtandem_module\tandem_5digit_precision.exe
+  F:\Documents\Projects\Vlad_Petyuk\DTARefinery\aux_xtandem_module\tandem_5digit_precision.exe
 
 Input file paths:
-  F:\Documents\Projects\Vlad_Petyuk\DTARefinery\Example_Data\Job1610358\xtandem_default_input.xml
-  F:\Documents\Projects\Vlad_Petyuk\DTARefinery\Example_Data\Job1610358\xtandem_taxonomy_list.xml
+  F:\Documents\Projects\Vlad_Petyuk\DTARefinery\aux_xtandem_module\xtandem_default_input.xml
+  F:\Documents\Projects\Vlad_Petyuk\DTARefinery\aux_xtandem_module\xtandem_taxonomy_list.xml
 
-Created X!Tandem config file at Example_Data\Job1610358\Adult_Pancreas_Gel_Elite_60_f02_dta_CFG.xmlstep 1.  starting x!tandem run. 09/19/19 13:19:26
-step 1.  finished x!tandem run. 09/19/19 13:19:29
+Created X!Tandem config file at Example_Data\Job1610358\Adult_Pancreas_Gel_Elite_60_f02_dta_CFG.xml
+    using FASTA file at         c:\DMS_Temp_Org\ID_006331_C5A5E51E.fasta
+
+step 1.  starting x!tandem run. 09/19/19 16:42:33
+step 1.  finished x!tandem run. 09/19/19 16:42:38
 
 	Did not find files from DeconMSn's output
 	  Adult_Pancreas_Gel_Elite_60_f02_DeconMSn_log.txt
@@ -21,7 +24,7 @@ step 1.  finished x!tandem run. 09/19/19 13:19:29
 
 step 2.  parsing dta file Adult_Pancreas_Gel_Elite_60_f02_dta.txt
 step 2.  done parsing dta file Adult_Pancreas_Gel_Elite_60_f02_dta.txt
-step 3.  starting refining the parent ion masses 09/19/19 13:19:29
+step 3.  starting refining the parent ion masses 09/19/19 16:42:39
 	refining with additiveRegression/numpy_runmed_lowess approach
 	starting regression. 1 pass, scanNum parameter...
 	starting regression. 1 pass, mz parameter...
@@ -29,12 +32,14 @@ step 3.  starting refining the parent ion masses 09/19/19 13:19:29
 	starting regression. 2 pass, mz parameter...
 	starting regression. 3 pass, scanNum parameter...
 	starting regression. 3 pass, mz parameter...
-step 3.  done refining the parent ion masses 09/19/19 13:19:38
+	starting regression. 4 pass, scanNum parameter...
+	starting regression. 4 pass, mz parameter...
+step 3.  done refining the parent ion masses 09/19/19 16:42:52
 step 4.  updating the dta file
 step 4.  done updating the dta file
 --------------------
 finished refining Example_Data\Job1610358\Adult_Pancreas_Gel_Elite_60_f02_dta.txt 
-in 00H:00M:13S
+in 00H:00M:19S
 
 Estimates of ORIGINAL parent ion mass error distribution:
 			mean	st.dev
@@ -43,6 +48,6 @@ Robust estimate		0.78	0.96
 
 Estimates of REFINED parent ion mass error distribution:
 			mean	st.dev
-Exp. Max. estimate	0.03	0.82
-Robust estimate		0.01	0.8
+Exp. Max. estimate	0.02	0.84
+Robust estimate		0.02	0.79
 
