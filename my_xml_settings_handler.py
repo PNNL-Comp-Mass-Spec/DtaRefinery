@@ -1,6 +1,7 @@
 import xml.dom.minidom
 import copy
 
+
 def extendDict(path, d):
     key = path[0]
     if not key in d:
@@ -24,12 +25,12 @@ def getPaths(paths, finalDict, mainNode):
     for path in paths:
         node = copy.deepcopy(mainNode)
         for step in path:
-            #get the final node. for each step there shold be only one
+            # get the final node. for each step there shold be only one
             node = [i for i in node.childNodes if i.localName == step][0]
         childrenAll = [i for i in node.childNodes if i.nodeType == i.ELEMENT_NODE]
         if childrenAll != []:
             children = [i for i in childrenAll if
-                            (i.localName != 'choice' and i.localName != 'par')]        
+                        (i.localName != 'choice' and i.localName != 'par')]
             if children != []:
                 del paths[paths.index(path)]
                 for child in children:
@@ -44,9 +45,8 @@ def getPaths(paths, finalDict, mainNode):
                         data = child.childNodes[0].data.strip('\t\n')
                     else:
                         data = ''
-                    #get to that node in dictionay
+                    # get to that node in dictionay
                     finaDict = addToDict(path, finalDict, label, data)
-                        
 
 
 def getSettingsFromXML(xmlFileName):
@@ -54,22 +54,19 @@ def getSettingsFromXML(xmlFileName):
     paths = [[]]
     finalDict = {}
     getPaths(paths, finalDict, xmlDoc)
-    #removes the first layer of allPars
+    # removes the first layer of allPars
     firstKey = next(iter(finalDict))
     return finalDict[firstKey]
 
 
-
-
-
 def dict2xml(doc, mainElement, finalDict):
-    currElem = mainElement    
+    currElem = mainElement
     for k in finalDict.keys():
         if type(finalDict[k]) == dict:
             '''create it'''
             element = doc.createElement(k)
             mainElement.appendChild(element)
-            dict2xml(doc, element, finalDict[k])        
+            dict2xml(doc, element, finalDict[k])
         else:
             name = 'par'
             if mainElement.localName in ['choices']:
@@ -81,41 +78,11 @@ def dict2xml(doc, mainElement, finalDict):
             mainElement.appendChild(element)
 
 
-
-
-def writeSettingsToXML( settings, fileName):
+def writeSettingsToXML(settings, fileName):
     doc = xml.dom.minidom.Document()
     mainElement = doc.createElement('allPars')
     doc.appendChild(mainElement)
     dict2xml(doc, mainElement, settings)
-    fh = open(fileName,'w')
+    fh = open(fileName, 'w')
     doc.writexml(fh, indent='\t', addindent='\t', newl='\n')
-    fh.close()    
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    fh.close()

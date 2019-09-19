@@ -19,19 +19,15 @@
 from distutils.core import setup
 import py2exe
 
-
-
 opts = {
-    'py2exe': { "includes" : ["matplotlib.numerix.fft",
-                              "matplotlib.numerix.linear_algebra",
-                              "matplotlib.numerix.random_array",
-                              "matplotlib.backends.backend_tkagg"],
-                'excludes': [],
-##                'dll_excludes': ['libgdk-win32-2.0-0.dll',
-##                                 'libgobject-2.0-0.dll']
-              }
-       }
-
+    'py2exe': {"includes": ["matplotlib.numerix.fft",
+                            "matplotlib.numerix.linear_algebra",
+                            "matplotlib.numerix.random_array",
+                            "matplotlib.backends.backend_tkagg"],
+               'excludes': [],
+               ##                'dll_excludes': ['libgdk-win32-2.0-0.dll',
+               ##                                 'libgobject-2.0-0.dll']
+               }
+}
 
 setup(console=["dta_refinery.py"], options=opts, requires=['numpy', 'matplotlib', 'wxPython'])
-
