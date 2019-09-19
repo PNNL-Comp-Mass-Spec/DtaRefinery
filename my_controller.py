@@ -278,8 +278,11 @@ class Controller:
                     continue
                 #
                 # clean up xtandem config files
-                os.popen('del "%s"' % cfgFileName)
-                os.popen('del "%s"' % self.xtandemCurrentTaxonomyListPath)
+                if os.path.exists(cfgFileName):
+                    os.remove(cfgFileName)
+
+                if os.path.exists(self.xtandemCurrentTaxonomyListPath):
+                    os.remove(self.xtandemCurrentTaxonomyListPath)
                 #############################################################################
 
             ############################################################################
@@ -335,13 +338,15 @@ class Controller:
                     self.logFh.write(statusString + '\n')
                     self.logFh.flush()
                     self.logFh.close()
-                    os.popen('del "%s"' % (xTandemResultsFile))
+                    if os.path.exists(xTandemResultsFile):
+                        os.remove(xTandemResultsFile)
                     continue
                 # combine xtandem results with LOG file
                 # ---to get parent MS scan, intensity and TIC
                 xtLogData = do_combine_xtandemRes_n_log_n_profile_file(xTandemRes, logFile, profileFile)
                 del xTandemRes  # clean up
-                os.popen('del "%s"' % (xTandemResultsFile))
+                if os.path.exists(xTandemResultsFile):
+                    os.remove(xTandemResultsFile)
             else:
                 statusString = '\n\tDid not find files from DeconMSn\'s output\n\t  %s\n\tor\n\t  %s' % (
                     os.path.basename(logFile), os.path.basename(profileFile))
@@ -371,7 +376,8 @@ class Controller:
                     self.logFh.write(statusString + '\n')
                     self.logFh.flush()
                     self.logFh.close()
-                    os.popen('del "%s"' % (xTandemResultsFile))
+                    if os.path.exists(xTandemResultsFile):
+                        os.remove(xTandemResultsFile)
                     continue
 
                 xtLogData = do_reformat_xtandemRes(xTandemRes)  # does do_combine_xtandemRes_n_log_file without log
@@ -472,7 +478,8 @@ class Controller:
                 print(statusString)
                 self.logFh.write(statusString + '\n')
                 self.logFh.flush()
-                os.popen('del "%s"' % (xTandemResultsFile))
+                if os.path.exists(xTandemResultsFile):
+                    os.remove(xTandemResultsFile)
                 continue
 
             toc = time.clock()
@@ -507,7 +514,8 @@ class Controller:
             self.logFh.write(statusString + '\n')
             self.logFh.flush()
 
-            os.popen('del "%s"' % (xTandemResultsFile))
+            if os.path.exists(xTandemResultsFile):
+                os.remove(xTandemResultsFile)
 
             try:
                 self.logFh.close()
