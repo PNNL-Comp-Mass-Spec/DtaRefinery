@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<allPars>
+	<!-- parameters for parent ion mass refinement -->
+	<refiningPars>
+		<choices>
+			<!-- Method of choice. 
+				Choices are either additiveRegression, simpleShift or bypassRefining -->
+			<choice label="refining method">additiveRegression</choice>
+			<!-- The preferred choice if additiveRegression selected. 
+				Choices are either numpy_runmed_spline, numpy_runmed_lowess or R_runmed_spline -->
+			<choice label="additiveRegression">numpy_runmed_lowess</choice>		
+			<!-- The preferred choice if simpleShift selected.
+				 Choices are either medianShift or ExpMax_Norm_n_FixedNorm -->		
+			<choice label="simpleShift">medianShift</choice>
+		</choices>
+		<regressionSettings>
+				<numpy_runmed_spline>
+					<par label="K">10</par>
+					<par label="runMedSpan">0.5</par>
+					<par label="sse smooth log10 range">-0.6, 0.0</par>
+					<par label="bisections">10</par>														
+				</numpy_runmed_spline>
+				<numpy_runmed_lowess>
+					<par label="K">10</par>
+					<par label="runMedSpan">0.1</par>
+					<par label="lowess span">0.1</par>
+					<par label="lowess robust iters">3</par>					
+				</numpy_runmed_lowess>
+				<R_runmed_spline>
+					<par label="K">10</par>
+					<par label="runMedSpan">0.25</par>
+					<par label="spar range">0.6, 1.1</par>
+					<par label="spar steps number">5</par>
+				</R_runmed_spline>
+		</regressionSettings>
+		<otherParams>
+			<!-- dimensions to use
+				Choices are: scanNum, mz, logTrappedIonInt, trappedIonsTIC -->
+			<par label="dimensions">scanNum, mz, logTrappedIonInt, trappedIonsTIC</par>
+			<par label="use overfit proof mode">True</par>
+			<par label="number of splits for overfit proof mode">10</par>
+			<!--if less than this number it switches to median shift-->
+			<par label="minimum number of peptides for regression">50</par>
+		</otherParams>
+	</refiningPars>
+	<!-- scatterplots and histograms -->
+	<plottingPars>
+		<par label="plot all iteration fits">False</par>	
+		<par label="plot final scatterplots">True</par>	
+		<par label="plotting range, ppm">-30.0, 30.0</par>			
+		<par label="histogram bin size, ppm">1.0</par>							
+	</plottingPars>
+	<!-- x!tandem settings -->
+	<xtandemPars>
+		<par label="xtandem exe file">C:\DMS_Programs\DtaRefinery\aux_xtandem_module\tandem_5digit_precision.exe</par>
+		<par label="default input">F:\Documents\Projects\Vlad_Petyuk\DTARefinery\Example_Data\Job1610358\xtandem_default_input.xml</par>
+		<par label="taxonomy list">F:\Documents\Projects\Vlad_Petyuk\DTARefinery\Example_Data\Job1610358\xtandem_taxonomy_list.xml</par>		
+		<par label="maximum valid E value">0.01</par>
+		<par label="parent ion mass tolerance, ppm">-100.0, 100.0</par>
+		<par label="static modifications">57.0215@C</par>
+		<par label="dynamic modifications"></par>
+		<par label="cleavage specificity">[KR]|{P}</par>
+	</xtandemPars>
+</allPars>
