@@ -33,5 +33,5 @@ opts = {
        }
 
 
-setup( console=["dta_refinery.py"], options=opts)
+setup(console=["dta_refinery.py"], options=opts, requires=['numpy', 'matplotlib', 'wxPython'])
 
