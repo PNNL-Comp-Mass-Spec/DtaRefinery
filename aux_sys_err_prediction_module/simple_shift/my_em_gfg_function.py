@@ -1,7 +1,7 @@
-'''
+"""
 Expectation Maximization of Gaussian + Uniform Mixture model
 based on em_gu_2b_as_function.py file
-'''
+"""
 
 import random as r
 from numpy import random, concatenate,\
