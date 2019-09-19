@@ -1,20 +1,9 @@
-from aux_sys_err_prediction_module.my_systematic_error_prediction_module\
-     import do_predict_systematic_errors
-
+from aux_sys_err_prediction_module.my_systematic_error_prediction_module import do_predict_systematic_errors
 from my_final_hist import do_plot_final_hist
-from pprint import pprint as p
 
-import os.path
 import re
 
 from numpy import log, array, median, zeros, arange, pi, exp
-from pylab import plot, grid, axhline,\
-                 ylim, show, subplot, clf,\
-                 savefig, hist, xlabel, ylabel,\
-                 title, text, xlim, subplots_adjust,\
-                 savefig
-
-
 
 def do_fix_parent_ion_mz( Controller, xTandemInput, dtaEntries):
     
@@ -52,6 +41,4 @@ def do_fix_parent_ion_mz( Controller, xTandemInput, dtaEntries):
     do_plot_final_hist( Controller, xTandemInput, xtPpmNew, isFinalPlots)
             
     return dtaNewCore
-
-
 

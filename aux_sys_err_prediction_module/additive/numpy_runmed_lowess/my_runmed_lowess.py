@@ -1,12 +1,8 @@
 from aux_sys_err_prediction_module.additive.numpy_runmed_lowess.my_lowess import lowess
 from numpy import array, lexsort, where, vstack, ceil, average, median
 from aux_sys_err_prediction_module.additive.numpy_runmed_spline.my_runmed import runmed
-from scipy.interpolate import splev, splrep
-##import time
 #import psyco
 #psyco.full()
-
-
 
 def runmed_lowess_model(x, y, xFit, **params):
     """
@@ -93,7 +89,3 @@ if __name__ == '__main__':
     grid()
     ylim((-40,+40))
     show()
-
-
-
-

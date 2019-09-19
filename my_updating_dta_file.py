@@ -2,8 +2,6 @@ from pprint import pprint as p
 import csv
 import re
 
-
-
 def do_createFixedDtaFile_OLD( dtaFileName, fixedDtaEntryLines):
 
     dtaFH = open(dtaFileName, 'r')
@@ -22,12 +20,6 @@ def do_createFixedDtaFile_OLD( dtaFileName, fixedDtaEntryLines):
     fixedFH = open(fixedFileName, 'w')
     fixedFH.writelines(dtaLines)
     fixedFH.close()
-    
-
-
-
-
-
 
 def do_createFixedDtaFile( dtaFileName, fixedDtaEntryLines):
 
@@ -97,6 +89,4 @@ if __name__ == '__main__':
     f = open(logFile, 'w')
     f.writelines(lines)
     f.close()
-
-
 

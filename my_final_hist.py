@@ -1,11 +1,6 @@
-from aux_sys_err_prediction_module.my_systematic_error_prediction_module\
-     import do_predict_systematic_errors
-
 from aux_sys_err_prediction_module.simple_shift.my_em_gfg_function import do_em_norm_n_fixed_norm
-from pprint import pprint as p
 
 import os.path
-import re
 
 from numpy import log, array, median, zeros, arange, pi, exp, vstack, savetxt, around, append
 from pylab import plot, grid, axhline,\

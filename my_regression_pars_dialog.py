@@ -1,6 +1,5 @@
 import wx
 
-
 class RegressionParsDialog(wx.Dialog):
     def __init__(self, pars):
         wx.Dialog.__init__(self, None, -1,

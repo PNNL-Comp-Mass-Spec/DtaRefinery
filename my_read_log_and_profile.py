@@ -56,4 +56,3 @@ if __name__ == '__main__':
     profileFileName = 'VP1P156_A-b_18Dec06_Draco_06-07-10fst2_profile.txt'
     x = getAuxInfo(logFileName, profileFileName)
     print(x['3198'])
-

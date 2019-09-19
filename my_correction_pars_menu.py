@@ -1,7 +1,6 @@
 import wx
 import copy
 
-
 # this one called first
 class CorrectionParsMenu(wx.Menu):
     def __init__(self, parent):
@@ -837,10 +836,6 @@ class BypassRefiningDialog( wx.Dialog):
         mainSizer.Add(bttnSizer, 0, wx.ALL|wx.EXPAND, 5)
         self.SetSizer(mainSizer)
         self.Fit()
-
-
-
-
 
 if __name__ == '__main__':
     app = wx.PySimpleApp()

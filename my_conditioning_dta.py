@@ -6,13 +6,8 @@
 # fixes the problem in parsing when the parent MH is
 # an integer, but not a floating point value
 
-
 from my_read_log_and_profile import getAuxInfo
-from math import log as lg
-import csv
 import re
-
-
 
 def do_read_just_dta_file( dtaFileName):
 

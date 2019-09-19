@@ -1,7 +1,5 @@
 from numpy import array, median
 
-
-
 def runmed(x,NN):
     """
     x = array,
@@ -51,5 +49,3 @@ if __name__ == '__main__':
     ylim(-1.2,+2.2)
     plot(range(int(RANGE*0.1+1),int(RANGE*1.1+1)),res,'rd')
     show()
-
-

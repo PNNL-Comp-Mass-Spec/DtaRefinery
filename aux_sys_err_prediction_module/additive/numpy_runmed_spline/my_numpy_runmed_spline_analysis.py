@@ -1,12 +1,5 @@
 from aux_sys_err_prediction_module.additive.numpy_runmed_spline.my_runmed_spline import runmed_spline_model
 from numpy import random, array, median, where, zeros, average, hstack
-from scipy.interpolate import splev
-import time
-
-from pylab import plot, show, subplot, savefig, clf, ylim
-from pprint import pprint as p
-
-
 
 myName = 'numpy_runmed_spline'
 useMAD = True #Use median absolute deviation instead of sum of squared residuals
@@ -175,4 +168,3 @@ if __name__ == '__main__':
     plot(x1,y1-yEval,'go')
     ylim([-1.5, +1.5])
     show()
-

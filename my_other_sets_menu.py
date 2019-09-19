@@ -1,9 +1,6 @@
 import wx
 import copy
 import re
-from pprint import pprint as p
-
-
 
 class OtherSetsMenu(wx.Menu):
     def __init__(self, parent):

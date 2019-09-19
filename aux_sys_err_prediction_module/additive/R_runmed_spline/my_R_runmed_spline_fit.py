@@ -1,5 +1,4 @@
 from numpy import array, ceil
-from time import clock as c
 
 def R_runmed_smooth_spline(x, y, xFit, **kwargs):
 
@@ -92,5 +91,3 @@ if __name__ == '__main__':
     plot(x,yFit,'r+')
     ylim((-30, +30))
     show()
-
-

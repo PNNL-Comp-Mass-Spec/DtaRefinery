@@ -2,11 +2,6 @@ from aux_sys_err_prediction_module.additive.R_runmed_spline.my_R_runmed_spline_a
 from aux_sys_err_prediction_module.additive.numpy_runmed_lowess.my_numpy_runmed_lowess_analysis import runmed_lowess_MAIN
 from aux_sys_err_prediction_module.additive.numpy_runmed_spline.my_numpy_runmed_spline_analysis import runmed_spline_MAIN
 
-
-from pprint import pprint as p
-
-
-
 def do_1D_regression_analysis(ARG3, Controller):
     '''
     just picks the right regression approach and passes to it all the arguments

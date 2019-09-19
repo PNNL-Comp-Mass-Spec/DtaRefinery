@@ -1,11 +1,7 @@
 from aux_sys_err_prediction_module.additive.R_runmed_spline.my_R_runmed_spline_fit import R_runmed_smooth_spline
 from numpy import random, array, median, where, zeros, average, arange, hstack
-from scipy.interpolate import splev
-from pylab import plot, show, subplot, savefig, clf, ylim
-from pprint import pprint as p
 
 from win32com.client import Dispatch
-
 
 myName = 'R_runmed_spline'
 useMAD = True #use median absolute deviations instead of sum of squared residues
@@ -174,4 +170,3 @@ if __name__ == '__main__':
     plot(x1,y1-yEval,'go')
     ylim([-1.5, +1.5])
     show()
-

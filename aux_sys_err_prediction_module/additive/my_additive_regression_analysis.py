@@ -1,7 +1,5 @@
-from pprint import pprint as p
 #import psyco
 import os.path
-import copy
 import random
 import math
 #psyco.full()
@@ -359,13 +357,3 @@ def do_additive_regression_analysis( Controller, xTandemInput, dtaInput):
 
     # xtResPpms <- overfit proof if corresponding option was enabled
     return xtResPpms, dtaSysPpms
-
-
-
-
-
-
-
-
-
-

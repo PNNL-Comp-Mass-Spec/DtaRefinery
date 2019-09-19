@@ -1,8 +1,6 @@
 import xml.dom.minidom
 import copy
 
-
-
 def extendDict(path, d):
     key = path[0]
     if not key in d:

@@ -6,9 +6,8 @@ based on em_gu_2b_as_function.py file
 import random as r
 from numpy import random, concatenate,\
                   zeros, array, logical_not,\
-                  std, mean, pi, exp, log, arange
+                  pi, exp, log, arange
 from numpy import sum as summa
-
 
 def do_em_norm_n_fixed_norm(mix, numIter=30):
 

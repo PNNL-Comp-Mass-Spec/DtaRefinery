@@ -2,7 +2,6 @@ import sys
 import wx
 import os
 from my_controller             import Controller
-from my_regression_pars_dialog import RegressionParsDialog
 from my_correction_pars_menu   import CorrectionParsMenu
 from my_other_sets_menu        import OtherSetsMenu
 from my_xml_settings_handler   import  writeSettingsToXML

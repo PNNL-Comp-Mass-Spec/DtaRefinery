@@ -1,9 +1,4 @@
 from my_read_log_and_profile import getAuxInfo
-##from pprint import pprint as p
-##import csv
-##from math import log as lg
-
-
 
 def do_combine_xtandemRes_n_log_n_profile_file( xTandemRes, logFileName, profileFileName):
 

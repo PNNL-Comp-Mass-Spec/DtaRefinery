@@ -1,5 +1,4 @@
 import xml.dom.minidom
-import time
 import re
 import numpy
 
@@ -97,10 +96,3 @@ if __name__ == '__main__':
     rez = do_parse_XTandemXmlOutput('VP2P47_B_unf_5xDil_rn1_11Oct07_Raptor_Fst-75-1_dta_OUT.xml')
     rez = numpy.array(rez)    
     numpy.savetxt('dataRez.txt', rez, fmt='%s', delimiter='\t')
-
-    
-
-        
-    
-
-

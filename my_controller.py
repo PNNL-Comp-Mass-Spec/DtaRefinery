@@ -1,12 +1,7 @@
-from pprint import pprint as p
 import time
-
-import numpy #for saving text files
-
 import copy
 import os
 import re
-import sys
 import xml.dom.minidom
 import subprocess
 
@@ -16,7 +11,6 @@ from my_conditioning_xtandem_results  import do_combine_xtandemRes_n_log_n_profi
 from my_updating_dta_file             import do_createFixedDtaFile
 from my_parent_ion_mz_fixing_module   import do_fix_parent_ion_mz
 from my_xml_settings_handler          import getSettingsFromXML, writeSettingsToXML
-
 
 class Controller:
     def __init__(self, dtaRefineryDir):
@@ -531,11 +525,6 @@ class Controller:
                 # the file has already been closed
                 continue
 
-
-
-
-
-
     def performSomeChecks(self):
         #check that R(D)COM is installed if R_runmed_spline is about to run
         from win32com.client import Dispatch
@@ -550,13 +539,4 @@ class Controller:
                 self.logFh.write(statusString+'\n')
                 self.logFh.flush()
                 self.logFh.close()
-
-
-
-
-
-
-
-
-
 
