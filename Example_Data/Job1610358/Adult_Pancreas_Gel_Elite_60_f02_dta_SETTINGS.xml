@@ -40,9 +40,9 @@
 			<par label="histogram bin size, ppm">1.0</par>
 		</plottingPars>
 		<xtandemPars>
-			<par label="xtandem exe file">C:\DMS_Programs\DtaRefinery\aux_xtandem_module\tandem_5digit_precision.exe</par>
-			<par label="default input">F:\Documents\Projects\Vlad_Petyuk\DTARefinery\Example_Data\Job1610358\xtandem_default_input.xml</par>
-			<par label="taxonomy list">F:\Documents\Projects\Vlad_Petyuk\DTARefinery\Example_Data\Job1610358\xtandem_taxonomy_list.xml</par>
+			<par label="xtandem exe file">aux_xtandem_module\tandem_5digit_precision.exe</par>
+			<par label="default input">aux_xtandem_module\xtandem_default_input.xml</par>
+			<par label="taxonomy list">aux_xtandem_module\xtandem_taxonomy_list.xml</par>
 			<par label="maximum valid E value">0.01</par>
 			<par label="parent ion mass tolerance, ppm">-100.0, 100.0</par>
 			<par label="static modifications">57.0215@C</par>
