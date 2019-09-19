@@ -57,9 +57,6 @@ if __name__ == '__main__':
 
     from time import clock as c
     from pylab import hist, show, hold, ion, plot, xlim, draw, ioff, close
-
-    #import psyco
-    #psyco.bind(do_EM_nomr_n_unif)
     
     #---make a mixed distribution------------------------------
     norm1 = random.normal(loc=0.0, scale= 1.0, size=1000)

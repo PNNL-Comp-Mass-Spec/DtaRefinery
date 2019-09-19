@@ -1,8 +1,6 @@
-#import psyco
 import os.path
 import random
 import math
-#psyco.full()
 
 #
 from aux_sys_err_prediction_module.additive.my_1D_regression_analysis import do_1D_regression_analysis

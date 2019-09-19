@@ -1,8 +1,6 @@
 from numpy import array, lexsort, where, vstack, ceil, average, median
 from aux_sys_err_prediction_module.additive.numpy_runmed_spline.my_runmed import runmed
 from scipy.interpolate import splev, splrep
-#import psyco
-#psyco.full()
 
 def runmed_spline_model(x, y, xFit, **kwargs):
     """
@@ -48,13 +46,9 @@ def runmed_spline_model(x, y, xFit, **kwargs):
     
 if __name__ == '__main__':
     import csv
-    #import psyco
     from numpy import log
     from pylab import plot, grid, axhline,\
                      ylim, show, subplot
-
-    #psyco.full()
-
     
     #---READING FILES----------------------------------
     xTandemInputFH    = open('xt_log_merg.txt','r')

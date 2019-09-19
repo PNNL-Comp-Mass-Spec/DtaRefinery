@@ -1,8 +1,6 @@
 from aux_sys_err_prediction_module.additive.numpy_runmed_lowess.my_lowess import lowess
 from numpy import array, lexsort, where, vstack, ceil, average, median
 from aux_sys_err_prediction_module.additive.numpy_runmed_spline.my_runmed import runmed
-#import psyco
-#psyco.full()
 
 def runmed_lowess_model(x, y, xFit, **params):
     """
@@ -38,25 +36,13 @@ def runmed_lowess_model(x, y, xFit, **params):
     
     return yFit, (uA[:,0], yRunMed)
 
-    
-
-
-
-
-
-
-
 
 if __name__ == '__main__':
     import csv
     import time
-    #import psyco
     from numpy import log
     from pylab import plot, grid, axhline,\
                      ylim, show, subplot
-
-    #psyco.full()
-
     
     #---READING FILES----------------------------------
     xTandemInputFH    = open('xt_log_merg.txt','r')
