@@ -33,7 +33,7 @@ def do_combine_xtandemRes_n_log_n_profile_file( xTandemRes, logFileName, profile
 ##        index = [i for i in flog_scan_indeces if flog[3][i] == charge]
 ##        
 ##        if len(index) != 1:
-##            raise "Some error in indexing scans and charges"
+##            raise Exception("Some error in indexing scans and charges")
 ##
 ##        index = index[0] #de-listing
 ##

@@ -7,8 +7,9 @@ def runmed(x,NN):
     x = array,
     k = extra number of NN from one side
     """
-    if NN%2 == 0:
-        raise "Error in runmed. Use odd NN"
+    if NN % 2 == 0:
+        raise Exception("Error in runmed. Use odd NN")
+
     k = int((NN+1)/2)
     sm = x.copy()
     n = len(x)
