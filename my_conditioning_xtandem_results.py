@@ -75,7 +75,8 @@ def do_combine_xtandemRes_n_log_n_profile_file( xTandemRes, logFileName, profile
                'logTrappedIonInt',\
                'trappedIonsTIC',\
                'massErrorPpm']]
-    dataOut = header + dataOut
+
+    dataOut = header + list(dataOut)
     return dataOut
 
 
@@ -103,7 +104,8 @@ def do_reformat_xtandemRes( xTandemRes):
                'scanNum',\
                'mz',\
                'massErrorPpm']]
-    dataOut = header + dataOut
+
+    dataOut = header + list(dataOut)
     return dataOut
 
 

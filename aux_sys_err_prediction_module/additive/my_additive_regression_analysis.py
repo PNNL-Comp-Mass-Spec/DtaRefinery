@@ -3,6 +3,7 @@ from pprint import pprint as p
 import os.path
 import copy
 import random
+import math
 #psyco.full()
 
 #
@@ -65,33 +66,39 @@ def do_split_inputs( xTandemInput, dtaInput, K):
     holder = [[[],[]] for x in range(K+1)]
 
     # dtaEntryUnqID
-    # just takes the first colums of IDs
+    # just takes the first columns of IDs
     idsXt   = [x[0] for x in xTandemInput[1:]]
     uidsXt  = dict.fromkeys(idsXt).keys()
     idsDta  = [x[0] for x in dtaInput[1:]]
 
     # fill the first slot with dtaEntryUnqID
-    # holder[0][0] unique IDs from x!tandem results
-    # holder[0][1] whatever left in dta file
+    # holder[0][0] unique IDs from x!tandem results: list of values like 'scan=14630 cs=2', 'scan=14631 cs=3'
+    # holder[0][1] whatever left in dta file: list of values like 'scan=14 cs=2', scan=15 cs=3'
     idsDtaOnly = idsDta[:]
     for x in uidsXt:
-        idsDtaOnly.remove(x) 
-    holder[0][0] = uidsXt[:]
-    holder[0][1] = idsDtaOnly[:] 
-
+        idsDtaOnly.remove(x)
+        
+    holder[0][0] = list(uidsXt)
+    holder[0][1] = idsDtaOnly
+    
     # fill the rest K slots
     L = len(uidsXt)
     # it may be a problem here if L < K !!
     N = L/K #min length of pieces
     R = L%K #how much left
     Z = [N for j in range(K)] #get K numbers N      ??same as [N]*K??
+            
     Z[0:R] = [j+1 for j in Z[0:R]] # distribute the leftovers each into one interval
-    random.shuffle(uidsXt) #randomize the entry IDs
+
+    shuffledXtUids = list(uidsXt)
+    random.shuffle(shuffledXtUids) #randomize the entry IDs
+
     ind = 0
     for i in range(K):
-        j = Z[i]
-        learn = uidsXt[0:ind] + uidsXt[ind+j:] # exclude ind:ind+j interval
-        fit = uidsXt[ind:ind+j]                # include ind:ind+j interval
+        j = math.floor(Z[i])
+ 
+        learn = shuffledXtUids[0:ind] + shuffledXtUids[ind+j:] # exclude ind:ind+j interval
+        fit = shuffledXtUids[ind:ind+j]                # include ind:ind+j interval
         holder[i+1][0] = learn[:]
         holder[i+1][1] = fit[:]
         ind += j
@@ -313,11 +320,24 @@ def do_additive_regression_analysis( Controller, xTandemInput, dtaInput):
         dtaPpm = ARG2[i][3]
         sysErrPpm.extend(dtaPpm)
 
-    # now we got IDs with corresponding systematic error
-    # (dtaEntryUnqID, ppm)
-    idToPpm = zip(dtaIDs, sysErrPpm)
-    idToPpm = [[y[x] for y in idToPpm] for x in (0,1)]
+    '''
+    print('\nFirst 10 items of dtaIDs; size: ', len(dtaIDs))
+    print(type(dtaIDs))
+        
+    for i in dtaIDs[0:10]:
+        print(i)
 
+    print('\nFirst 10 items of sysErrPpm; size: ', len(sysErrPpm))
+    print(type(sysErrPpm))
+        
+    for i in sysErrPpm[0:10]:
+        print(i)
+     '''   
+                
+    # now obtain got IDs with corresponding systematic error
+    # idToPpm is a list of (dtaEntryUnqID, ppm)
+    idToPpm = [[y[x] for y in list(zip(dtaIDs, sysErrPpm))] for x in (0,1)]
+        
     # now go through inputs like xTandemInput
     # and report fixed errors given the dtaEntryUnqID
     idCol      = list(xTandemInput[0]).index('dtaEntryUnqID')
@@ -325,6 +345,7 @@ def do_additive_regression_analysis( Controller, xTandemInput, dtaInput):
     dtaIDs     = [i[idCol] for i in xTandemInput[1:]]
     xtFullPpms = array([float(i[ppmCol]) for i in xTandemInput[1:]])
     indices    = [idToPpm[0].index(i) for i in dtaIDs]
+    
     xtSysPpms  = array([idToPpm[1][i] for i in indices])
     xtResPpms  = xtFullPpms + xtSysPpms # yes. it is negative systematic error
 

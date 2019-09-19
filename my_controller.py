@@ -26,7 +26,7 @@ class Controller:
         self.getSettings()
 
         self.allDimensions = ['scanNum', 'mz', 'logTrappedIonInt', 'trappedIonsTIC']
-            
+
         self.logFileMissing = 'True/False' #will hold the info if the log file missing or present
 
         self.dtaFileList = [] #changed from gui or command line input
@@ -38,14 +38,14 @@ class Controller:
     def getSettings(self):
         self.defaultSettings = getSettingsFromXML(self.settingsFile)
         self.updatedSettings = copy.deepcopy(self.defaultSettings)
-        
+
 
     def printVersion(self):
         statusString = "DtaRefinery %s" % self.version
         print(statusString)
         self.logFh.write(statusString+'\n')
         self.logFh.flush()
-        
+
 
 
     def SetXtandemPaths(self):
@@ -58,23 +58,40 @@ class Controller:
         self.xtandemTaxonomyListPath = os.path.abspath(xtandemTaxonomyList)
         #
         # check the paths
-        # switch to defaults if something was wrong with paths        
+        # switch to defaults if something was wrong with paths
         xtandemPathsValid = True
         if ((not os.path.exists(self.xtandemExePath)) or
             (not os.path.exists(self.xtandemDefaultInputPath)) or
             (not os.path.exists(self.xtandemTaxonomyListPath))):
             #
             statusString = '\n' + 'Warning! Did not find one of the X!Tandem files\n'
-            statusString = statusString + ('switching to the default X!Tandem location at\n%s\n' %
-                                            os.path.abspath(os.path.join(self.dtaRefineryDir, 'aux_xtandem_module')))
+
+            if os.path.exists(self.xtandemExePath):
+                statusString += '  found:        ' + self.xtandemExePath + '\n'
+            else:
+                statusString += '  did not find: ' + self.xtandemExePath + '\n'
+
+            if os.path.exists(self.xtandemDefaultInputPath):
+                statusString += '  found:        ' + self.xtandemDefaultInputPath + '\n'
+            else:
+                statusString += '  did not find: ' + self.xtandemDefaultInputPath + '\n'
+
+            if os.path.exists(self.xtandemTaxonomyListPath):
+                statusString += '  found:        ' + self.xtandemTaxonomyListPath + '\n'
+            else:
+                statusString += '  did not find: ' + self.xtandemTaxonomyListPath + '\n'
+
+            xtandemDir = os.path.join(self.dtaRefineryDir, 'aux_xtandem_module')
+
+            statusString += ('\nSwitching to the default X!Tandem location at\n  %s\n' % os.path.abspath(xtandemDir))
             print(statusString)
             self.logFh.write(statusString+'\n')
             self.logFh.flush()
             #
-            xtandemDir = os.path.join( self.dtaRefineryDir, 'aux_xtandem_module')
             self.xtandemExePath          = os.path.join(xtandemDir, 'tandem_5digit_precision.exe')
             self.xtandemDefaultInputPath = os.path.join(xtandemDir, 'xtandem_default_input.xml')
             self.xtandemTaxonomyListPath = os.path.join(xtandemDir, 'xtandem_taxonomy_list.xml')
+
             # Check if default location is fine
             if ((not os.path.exists(self.xtandemExePath)) or
                 (not os.path.exists(self.xtandemDefaultInputPath)) or
@@ -82,9 +99,23 @@ class Controller:
 
                 statusString = "Error!\n"
                 statusString += "Can not find xtandem files in their default location.\n"
-                statusString += 'filenames:\n%s\n%s\n%s\n' % (  self.xtandemExePath,
-                                                                self.xtandemDefaultInputPath,
-                                                                self.xtandemTaxonomyListPath)
+
+
+                if os.path.exists(self.xtandemExePath):
+                    statusString += '  found:        ' + self.xtandemExePath + '\n'
+                else:
+                    statusString += '  did not find: ' + self.xtandemExePath + '\n'
+
+                if os.path.exists(self.xtandemDefaultInputPath):
+                    statusString += '  found:        ' + self.xtandemDefaultInputPath + '\n'
+                else:
+                    statusString += '  did not find: ' + self.xtandemDefaultInputPath + '\n'
+
+                if os.path.exists(self.xtandemTaxonomyListPath):
+                    statusString += '  found:        ' + self.xtandemTaxonomyListPath + '\n'
+                else:
+                    statusString += '  did not find: ' + self.xtandemTaxonomyListPath + '\n'
+
                 print(statusString)
                 self.logFh.write(statusString+'\n')
                 self.logFh.flush()
@@ -92,16 +123,26 @@ class Controller:
                 raise Exception
 
             else:
-            
+
                 self.updatedSettings['xtandemPars']['xtandem exe file'] = str(self.xtandemExePath)
                 self.updatedSettings['xtandemPars']['default input'] = str(self.xtandemDefaultInputPath)
                 self.updatedSettings['xtandemPars']['taxonomy list'] = str(self.xtandemTaxonomyListPath)
         #
+
+        statusString = '\nUsing X!Tandem at:'
+        statusString += '\n  ' + os.path.abspath(self.xtandemExePath)
+
+        statusString += '\n\nInput file paths:'
+        statusString += '\n  ' + os.path.abspath(self.xtandemDefaultInputPath)
+        statusString += '\n  ' + os.path.abspath(self.xtandemTaxonomyListPath)
+
+        print(statusString)
+        self.logFh.write(statusString+'\n')
+        self.logFh.flush()
+
         dtaFileDirName = os.path.dirname(self.dtaFileList[0])
-        self.xtandemCurrentTaxonomyListPath = os.path.join(dtaFileDirName, '~temp_taxonomy.xml') 
+        self.xtandemCurrentTaxonomyListPath = os.path.join(dtaFileDirName, '~temp_taxonomy.xml')
 
-
-        
 
     def Run(self):
 
@@ -118,11 +159,11 @@ class Controller:
             self.allDimensions = ['scanNum', 'mz', 'logTrappedIonInt', 'trappedIonsTIC']
             self.updatedSettings['refiningPars']['otherParams']['dimensions'] = originalSelectedDims
 
-            
+
             tic = time.clock()
-            
+
             dtaFileNameNoExt = os.path.splitext(dtaFile)[0]
-            
+
             # set the logFile
             logFileName = dtaFileNameNoExt + '_DtaRefineryLog.txt'
             if os.path.exists(logFileName):
@@ -135,7 +176,7 @@ class Controller:
             self.printVersion()
             self.SetXtandemPaths()
             self.performSomeChecks()
-            
+
             #setup taxonomy file
             taxDoc = xml.dom.minidom.parse(self.xtandemTaxonomyListPath)
             elementTaxon = taxDoc.getElementsByTagName("taxon")[0] #must be only one element
@@ -146,103 +187,118 @@ class Controller:
             taxDoc.writexml(taxonomyFH)
             taxonomyFH.close()
 
-            # setting up X!Tandem CFG file
-            cfgDoc = xml.dom.minidom.parse(self.xtandemDefaultInputPath)
-            nodeList = cfgDoc.getElementsByTagName("note")
-            inputNodeList = [x for x in nodeList if x.getAttribute('type') == 'input']
-            labelList = [x.getAttribute('label') for x in inputNodeList]
-            valuesList = [x.childNodes for x in inputNodeList]
-            #
-            # got all the handles in default_input.xml file
-            # now fill the slots
-            #
-            # max E value 
-            maxValidEvalueInd = labelList.index("output, maximum valid expectation value")
-            valuesList[maxValidEvalueInd][0].data = self.updatedSettings['xtandemPars']['maximum valid E value']
-            #
-            # ppm tolerances
-            ppmTols = self.updatedSettings['xtandemPars']['parent ion mass tolerance, ppm'].split(', ')
-            ppmTolMinusInd = labelList.index("spectrum, parent monoisotopic mass error minus")
-            ppmTolPlusInd = labelList.index("spectrum, parent monoisotopic mass error plus")
-            valuesList[ppmTolMinusInd][0].data = ppmTols[0]
-            valuesList[ppmTolPlusInd][0].data = ppmTols[1]
-            #
-            # static modifications
-            staticModsInd = labelList.index("residue, modification mass")
-            valuesList[staticModsInd][0].data = self.updatedSettings['xtandemPars']['static modifications']
-            #
-            # dynamic modifications
-            dynamicModsInd = labelList.index("residue, potential modification mass")
-            valuesList[dynamicModsInd][0].data = self.updatedSettings['xtandemPars']['dynamic modifications']
-            #
-            # cleavage specificity and also respectively maximum nimber of missed cleavages
-            cleavageSpecificityIndex = labelList.index("protein, cleavage site")
-            valuesList[cleavageSpecificityIndex][0].data = self.updatedSettings['xtandemPars']['cleavage specificity']
-            misedCleavagesIndex = labelList.index("scoring, maximum missed cleavage sites")
-            if self.updatedSettings['xtandemPars']['cleavage specificity'] == "[X]|[X]":
-                valuesList[misedCleavagesIndex][0].data = "50"
-            else:
-                # just in case one missed cleavge
-                # for speed reasons it is better to have even 0
-                # but for safety let's have 1
-                valuesList[misedCleavagesIndex][0].data = "1"
-            #
-            # protein collection
-            proteinTaxonInd = labelList.index("protein, taxon")
-            valuesList[proteinTaxonInd][0].data = 'FASTAFILE'
-            #
-            # path to taxonomy file
-            taxonomyPathInd = labelList.index("list path, taxonomy information")
-            valuesList[taxonomyPathInd][0].data = self.xtandemCurrentTaxonomyListPath
-            #
-            # just handles on input and output spectra files
-            specPathInd  = labelList.index("spectrum, path")
-            outPathInd = labelList.index("output, path")
-            #
-            #create xtandem input cfg xml file
-            valuesList[specPathInd][0].data = dtaFile #file in
-            valuesList[outPathInd][0].data = dtaFileNameNoExt + '_OUT.xml' #file out
-            cfgFileName = dtaFileNameNoExt + '_CFG.xml' #xtandem cfg xml file
-            cfgFH = open(cfgFileName, 'w')
-            cfgDoc.writexml(cfgFH)
-            cfgFH.close()
-            #############################################################################        
-
 
             #############################################################################
-            # run XTandem
-            try:
-                localTime = time.strftime("%m/%d/%y %H:%M:%S", time.localtime())
-                statusString = 'step 1.  starting x!tandem run. %s' % localTime 
-                print('\n'+statusString)
-                self.logFh.write(statusString+'\n')
-                self.logFh.flush()
-                subprocess.call([self.xtandemExePath,cfgFileName])
-                localTime = time.strftime("%m/%d/%y %H:%M:%S", time.localtime())
-                statusString = 'step 1.  finished x!tandem run. %s' % localTime 
+            # Check for existing results
+            #---The file name is: dtaFileNameNoExt +'_OUT.xml'
+            xTandemResultsFile = dtaFileNameNoExt + '_OUT.xml'
+
+            if os.path.exists(xTandemResultsFile):
+                statusString = '\nUsing existing X!Tandem results\n  ' + xTandemResultsFile
                 print(statusString)
-                self.logFh.write(statusString+'\n')
+                self.logFh.write(statusString)
                 self.logFh.flush()
-            except:
-                localTime = time.strftime("%m/%d/%y %H:%M:%S", time.localtime())
-                statusString = 'step 1.  x!tandem run has failed! %s' % localTime 
-                print('\n'+statusString)
-                self.logFh.write(statusString+'\n')
+
+            else:
+
+                # setting up X!Tandem CFG file
+                cfgDoc = xml.dom.minidom.parse(self.xtandemDefaultInputPath)
+                nodeList = cfgDoc.getElementsByTagName("note")
+                inputNodeList = [x for x in nodeList if x.getAttribute('type') == 'input']
+                labelList = [x.getAttribute('label') for x in inputNodeList]
+                valuesList = [x.childNodes for x in inputNodeList]
+                #
+                # got all the handles in default_input.xml file
+                # now fill the slots
+                #
+                # max E value
+                maxValidEvalueInd = labelList.index("output, maximum valid expectation value")
+                valuesList[maxValidEvalueInd][0].data = self.updatedSettings['xtandemPars']['maximum valid E value']
+                #
+                # ppm tolerances
+                ppmTols = self.updatedSettings['xtandemPars']['parent ion mass tolerance, ppm'].split(', ')
+                ppmTolMinusInd = labelList.index("spectrum, parent monoisotopic mass error minus")
+                ppmTolPlusInd = labelList.index("spectrum, parent monoisotopic mass error plus")
+                valuesList[ppmTolMinusInd][0].data = ppmTols[0]
+                valuesList[ppmTolPlusInd][0].data = ppmTols[1]
+                #
+                # static modifications
+                staticModsInd = labelList.index("residue, modification mass")
+                valuesList[staticModsInd][0].data = self.updatedSettings['xtandemPars']['static modifications']
+                #
+                # dynamic modifications
+                dynamicModsInd = labelList.index("residue, potential modification mass")
+                valuesList[dynamicModsInd][0].data = self.updatedSettings['xtandemPars']['dynamic modifications']
+                #
+                # cleavage specificity and also respectively maximum nimber of missed cleavages
+                cleavageSpecificityIndex = labelList.index("protein, cleavage site")
+                valuesList[cleavageSpecificityIndex][0].data = self.updatedSettings['xtandemPars']['cleavage specificity']
+                misedCleavagesIndex = labelList.index("scoring, maximum missed cleavage sites")
+                if self.updatedSettings['xtandemPars']['cleavage specificity'] == "[X]|[X]":
+                    valuesList[misedCleavagesIndex][0].data = "50"
+                else:
+                    # just in case one missed cleavge
+                    # for speed reasons it is better to have even 0
+                    # but for safety let's have 1
+                    valuesList[misedCleavagesIndex][0].data = "1"
+                #
+                # protein collection
+                proteinTaxonInd = labelList.index("protein, taxon")
+                valuesList[proteinTaxonInd][0].data = 'FASTAFILE'
+                #
+                # path to taxonomy file
+                taxonomyPathInd = labelList.index("list path, taxonomy information")
+                valuesList[taxonomyPathInd][0].data = self.xtandemCurrentTaxonomyListPath
+                #
+                # just handles on input and output spectra files
+                specPathInd  = labelList.index("spectrum, path")
+                outPathInd = labelList.index("output, path")
+                #
+                #create xtandem input cfg xml file
+                valuesList[specPathInd][0].data = dtaFile #file in
+                valuesList[outPathInd][0].data = xTandemResultsFile    #file out
+                cfgFileName = dtaFileNameNoExt + '_CFG.xml' #xtandem cfg xml file
+                cfgFH = open(cfgFileName, 'w')
+                cfgDoc.writexml(cfgFH)
+                cfgFH.close()
+
+                statusString = '\nCreated X!Tandem config file at ' + cfgFileName
+                print(statusString)
+                self.logFh.write(statusString)
                 self.logFh.flush()
-                self.logFh.close()
-                continue
-            #
-            # clean up xtandem config files
-            os.popen('del "%s"' % cfgFileName)
-            os.popen('del "%s"' % self.xtandemCurrentTaxonomyListPath)
-            #############################################################################
-            
-            
+
+                #############################################################################
+                # run XTandem
+                try:
+                    localTime = time.strftime("%m/%d/%y %H:%M:%S", time.localtime())
+                    statusString = 'step 1.  starting x!tandem run. %s' % localTime
+                    print('\n'+statusString)
+                    self.logFh.write(statusString+'\n')
+                    self.logFh.flush()
+                    subprocess.call([self.xtandemExePath,cfgFileName])
+                    localTime = time.strftime("%m/%d/%y %H:%M:%S", time.localtime())
+                    statusString = 'step 1.  finished x!tandem run. %s' % localTime
+                    print(statusString)
+                    self.logFh.write(statusString+'\n')
+                    self.logFh.flush()
+                except:
+                    localTime = time.strftime("%m/%d/%y %H:%M:%S", time.localtime())
+                    statusString = 'step 1.  x!tandem run has failed! %s' % localTime
+                    print('\n'+statusString)
+                    self.logFh.write(statusString+'\n')
+                    self.logFh.flush()
+                    self.logFh.close()
+                    continue
+                #
+                # clean up xtandem config files
+                os.popen('del "%s"' % cfgFileName)
+                os.popen('del "%s"' % self.xtandemCurrentTaxonomyListPath)
+                #############################################################################
+
+
             ############################################################################
             # now parse the xtandem results
-            #---The file name is: dtaFileNameNoExt +'_OUT.xml'
-            xTandemRes = do_parse_XTandemXmlOutput( dtaFileNameNoExt + '_OUT.xml' )
-            os.popen('del "%s"' % ( dtaFileNameNoExt +'_OUT.xml'))
+            xTandemRes = do_parse_XTandemXmlOutput(xTandemResultsFile)
 
             # now check the number of peptides from xtandem and
             # switch to something safer if there number is below threshold
@@ -259,8 +315,8 @@ class Controller:
                 (self.updatedSettings['refiningPars']['choices']['refining method'] == 'additiveRegression')):
                 self.updatedSettings['refiningPars']['choices']['refining method'] = 'simpleShift'
                 self.updatedSettings['refiningPars']['choices']['simpleShift'] = 'medianShift'
-                
-                
+
+
             #parse and combine the dtaFile and LOG file
             dtaToLogPttrn = re.compile('(.+)_dta\.txt')
             logFile = dtaToLogPttrn.sub(r'\1_DeconMSn_log.txt',dtaFile)
@@ -292,16 +348,18 @@ class Controller:
                     self.logFh.write(statusString+'\n')
                     self.logFh.flush()
                     self.logFh.close()
+                    os.popen('del "%s"' % ( xTandemResultsFile))
                     continue
                 #combine xtandem results with LOG file
                 #---to get parent MS scan, intensity and TIC
                 xtLogData = do_combine_xtandemRes_n_log_n_profile_file( xTandemRes, logFile, profileFile)
                 del xTandemRes # clean up
+                os.popen('del "%s"' % ( xTandemResultsFile))
             else:
-                statusString = '\tdid not find files from DeconMSn\'s output\n\t%s\n\tor\n\t%s' % (os.path.basename(logFile),os.path.basename(profileFile))
-                statusString = statusString + '\n' + "\tthus, the program assumes that the concatenated dta file"
-                statusString = statusString + '\n' + "\tis from extract_msn and won\'t use TIC and ion intensity"
-                statusString = statusString + '\n' + "\tif those parameters were selected for regression analysis"                
+                statusString = '\n\tDid not find files from DeconMSn\'s output\n\t  %s\n\tor\n\t  %s' % (os.path.basename(logFile),os.path.basename(profileFile))
+                statusString = statusString + '\n\n' + "\tThus, the program assumes that the concatenated dta file"
+                statusString = statusString + '\n' +   "\tis from extract_msn and won\'t use TIC and ion intensity"
+                statusString = statusString + '\n' +   "\tif those parameters were selected for regression analysis\n"
                 print(statusString)
                 self.logFh.write(statusString+'\n')
                 self.logFh.flush()
@@ -320,13 +378,15 @@ class Controller:
                     self.logFh.write(statusString+'\n')
                     self.logFh.flush()
                 except:
-                    statusString = "step 2.  failed parsing dta file %s" % os.path.basename(dtaFile) 
+                    statusString = "step 2.  failed parsing dta file %s" % os.path.basename(dtaFile)
                     print(statusString)
                     self.logFh.write(statusString+'\n')
                     self.logFh.flush()
                     self.logFh.close()
+                    os.popen('del "%s"' % ( xTandemResultsFile))
                     continue
-                xtLogData  = do_reformat_xtandemRes( xTandemRes) #does do_combine_xtandemRes_n_log_file without log
+
+                xtLogData = do_reformat_xtandemRes( xTandemRes) #does do_combine_xtandemRes_n_log_file without log
                 # now check the settings and update if necessary
                 self.allDimensions = ['scanNum', 'mz']
                 selectedDims = self.updatedSettings['refiningPars']['otherParams']['dimensions']
@@ -348,7 +408,7 @@ class Controller:
                 del self.updatedSettings['spectra dataset']
             if 'spectra directory' in self.updatedSettings:
                 del self.updatedSettings['spectra directory']
-                
+
             # now check that if regression selected there is at least one dimension selected
             # otherwise switch to medianShift
             if (self.updatedSettings['refiningPars']['choices']['refining method'] == 'additiveRegression' and
@@ -362,9 +422,9 @@ class Controller:
 ##            self.updatedSettings['spectra dataset'] = os.path.basename(dtaFile).split('_dta.txt')[0] #original
             #better to switch to regular expression later
             self.updatedSettings['spectra dataset'] = os.path.basename(dtaFile).lower().split('_dta.txt')[0]
-            self.updatedSettings['spectra directory'] = os.path.dirname(dtaFile)            
+            self.updatedSettings['spectra directory'] = os.path.dirname(dtaFile)
 
-            
+
             #MAIN THING
             #fixing the parent mz
             try:
@@ -428,6 +488,7 @@ class Controller:
                 print(statusString)
                 self.logFh.write(statusString+'\n')
                 self.logFh.flush()
+                os.popen('del "%s"' % ( xTandemResultsFile))
                 continue
 
             toc = time.clock()
@@ -437,7 +498,7 @@ class Controller:
             print(statusString)
             self.logFh.write(statusString+'\n')
             self.logFh.flush()
-            
+
             #
             # now tell how successful was the refining
             # mean/stdev estimates before and after
@@ -462,13 +523,14 @@ class Controller:
             self.logFh.write(statusString+'\n')
             self.logFh.flush()
 
-          
+            os.popen('del "%s"' % ( xTandemResultsFile))
+
             try:
                 self.logFh.close()
             except:
                 # the file has already been closed
                 continue
-            
+
 
 
 
@@ -488,7 +550,7 @@ class Controller:
                 self.logFh.write(statusString+'\n')
                 self.logFh.flush()
                 self.logFh.close()
-        
+
 
 
 

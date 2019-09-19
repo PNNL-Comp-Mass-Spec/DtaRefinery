@@ -17,10 +17,10 @@ def runmed_lowess_model(x, y, xFit, **params):
 
     #removing redundant entries
     tA = zip(x,y)
-    utA = dict.fromkeys(tA).keys()
+    utA = list(dict.fromkeys(tA).keys())    
     uA = array(utA)
-    
-    #sorting by (1) parameter and (2) responce
+                  
+    #sorting by (1) parameter and (2) response
     iuA = lexsort(keys=(uA[:,1],uA[:,0]))
     uA = uA[iuA,:]
 

@@ -7,7 +7,7 @@ from pprint import pprint as p
 import os.path
 import re
 
-from numpy import log, array, median, zeros, arange, pi, exp, vstack, savetxt, around
+from numpy import log, array, median, zeros, arange, pi, exp, vstack, savetxt, around, append
 from pylab import plot, grid, axhline,\
                  ylim, show, subplot, clf,\
                  savefig, hist, xlabel, ylabel,\
@@ -161,7 +161,7 @@ def do_plot_final_hist( Controller, xTandemInput, xtPpmNew, isFinalPlots):
     # some info in the bottom left corner
     fineprint = 'dataset: %s\ntotal number of identifications: %s\nbin size: %s ppm'\
                 % (dSetName, len(xTandemInput), binSize)
-    t = gcf().text(0.05, 0.075, finePrint,
+    t = gcf().text(0.05, 0.075, fineprint,
                    horizontalalignment='left',
                    verticalalignment='top',
                    fontproperties=FontProperties(size=6))
@@ -245,6 +245,15 @@ def do_plot_final_hist( Controller, xTandemInput, xtPpmNew, isFinalPlots):
     # totalEMNew, totalMADNew 
     # totalEMOri, totalMADOri
     if isFinalPlots:
+       # The binCountOri and binCountNew arrays are likely 1 item shorter than bins
+       # The while loops correct for this
+       
+        while len(binCountOri) < len(bins):
+            binCountOri = append(binCountOri, [0])
+
+        while len(binCountNew) < len(bins):
+            binCountNew = append(binCountNew, [0])
+      
         data = vstack((bins, binCountOri, totalEMOri, totalMADOri, binCountNew, totalEMNew, totalMADNew)).T
         data = around(data,1)
         titles = ['MassErrorBin (ppm)', 'Original', 'OriginalFitEM', 'OriginalFitRobust', 
@@ -252,13 +261,3 @@ def do_plot_final_hist( Controller, xTandemInput, xtPpmNew, isFinalPlots):
         data = vstack((titles, data))
         histTxtPath = os.path.join(dirName, dSetName)+'_HIST.txt'
         savetxt(histTxtPath, data, fmt='%s', delimiter='\t')
-    
-
-
-
-
-
-
-    
-
-

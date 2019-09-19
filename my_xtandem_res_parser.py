@@ -87,10 +87,10 @@ def do_parse_XTandemXmlOutput(fileName):
     charge = [int(x[1]) for x in dataFlatUnq]    
 
     data = zip(scan, charge, mzTheor, ppm) 
-    data = [('scan', 'charge', 'mz', 'ppm')] + data
+    headersAndData = [('scan', 'charge', 'mz', 'ppm')] + list(data)
 
-    ##dataGroupModels = numpy.array(data)
-    return data
+    ##dataGroupModels = numpy.array(headersAndData)
+    return headersAndData
 
 if __name__ == '__main__':
 ##    rez = do_parse_XTandemXmlOutput('out_test.xml')

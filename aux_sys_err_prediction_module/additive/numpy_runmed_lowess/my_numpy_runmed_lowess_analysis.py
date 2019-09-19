@@ -2,6 +2,7 @@ from aux_sys_err_prediction_module.additive.numpy_runmed_lowess.my_runmed_lowess
 from numpy import random, array, median, where, zeros, average, hstack
 from scipy.interpolate import splev
 import time
+import math
 
 from pylab import plot, show, subplot, savefig, clf, ylim
 
@@ -69,7 +70,8 @@ def runmed_lowess_KCV_predErr(x, y, **params):
     #--Related to K-fold CV---------------------------
     L = len(x)
     N = L/K ##min length of pieces
-    W = range(L)
+    W = [i for i in range(L)]
+        
     Z = range(1,K+1)
     Z = [N for j in Z]
     R = L%K
@@ -84,12 +86,14 @@ def runmed_lowess_KCV_predErr(x, y, **params):
     #---running through K training/testings-------------
     for j in Z:
         
+        jInt = math.floor(j)
+        
         #---making training/testing subsets-------------
-        test = W[ind:ind+j]
+        test = W[ind:ind+jInt]
         test.sort()
-        train = W[0:ind] + W[ind+j:]
+        train = W[0:ind] + W[ind+jInt:]
         train.sort()
-        ind += j
+        ind += jInt
         #-----------------------------------------------
 
         #---fit runmed_spline here----------------------

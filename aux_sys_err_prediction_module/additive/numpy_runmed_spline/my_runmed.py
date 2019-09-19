@@ -9,7 +9,7 @@ def runmed(x,NN):
     """
     if NN%2 == 0:
         raise "Error in runmed. Use odd NN"
-    k = (NN+1)/2    
+    k = int((NN+1)/2)
     sm = x.copy()
     n = len(x)
     #first look, filling middle
