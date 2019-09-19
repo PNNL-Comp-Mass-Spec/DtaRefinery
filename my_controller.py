@@ -250,6 +250,8 @@ class Controller:
                 cfgFH.close()
 
                 statusString = '\nCreated X!Tandem config file at ' + cfgFileName
+                statusString += '\n    using FASTA file at         ' + self.fastaFile
+                statusString += '\n\n'
                 print(statusString)
                 self.logFh.write(statusString)
                 self.logFh.flush()
