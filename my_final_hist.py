@@ -80,7 +80,7 @@ def subHist(*args):
          transform = sbPlt.transAxes,\
          bbox = dict(facecolor='#EEEEEE',\
                      edgecolor='#EEEEEE',\
-                     width = 130,\
+#                     width = 130,\
                      pad = 5,\
                      alpha=0.85))
 
@@ -92,7 +92,7 @@ def subHist(*args):
          transform = sbPlt.transAxes,\
          bbox = dict(facecolor='#EEEEEE',\
                      edgecolor='#EEEEEE',\
-                     width = 130,\
+#                     width = 130,\
                      pad = 5,\
                      alpha=0.85))
 
@@ -104,7 +104,7 @@ def subHist(*args):
          transform = sbPlt.transAxes,\
          bbox = dict(facecolor='#EEEEEE',\
                      edgecolor='#EEEEEE',\
-                     width = 130,\
+#                     width = 130,\
                      pad = 5,\
                      alpha=0.0))
 
@@ -116,7 +116,7 @@ def subHist(*args):
          transform = sbPlt.transAxes,\
          bbox = dict(facecolor='#EEEEEE',\
                      edgecolor='#EEEEEE',\
-                     width = 130,\
+#                     width = 130,\
                      pad = 5,\
                      alpha=0.0))
 
