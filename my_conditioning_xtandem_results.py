@@ -47,8 +47,8 @@ def do_combine_xtandemRes_n_log_n_profile_file( xTandemRes, logFileName, profile
 ##        #---flog[7] AGC accumulation time
 ##        #---flog[8] TIC
 ##
-##        extra_info = (float(flog[1][index]),\
-##                      lg(float(flog[6][index])*float(flog[7][index])/1000, 10),\
+##        extra_info = (float(flog[1][index]),
+##                      lg(float(flog[6][index])*float(flog[7][index])/1000, 10),
 ##                      float(flog[8][index])*float(flog[7][index])/1000)
 ##        return extra_info
     
@@ -62,18 +62,18 @@ def do_combine_xtandemRes_n_log_n_profile_file( xTandemRes, logFileName, profile
     logTrappedIonInt =  [dictAuxInfo[str(i[0])][1] for i in xTandemRes[1:]]
     trappedIonsTIC =    [dictAuxInfo[str(i[0])][2] for i in xTandemRes[1:]]
 
-    dataOut = zip(dtaEntryUnqID,\
-                  ms1ScanNum,\
-                  mzObs,\
-                  logTrappedIonInt,\
-                  trappedIonsTIC,\
+    dataOut = zip(dtaEntryUnqID,
+                  ms1ScanNum,
+                  mzObs,
+                  logTrappedIonInt,
+                  trappedIonsTIC,
                   massErrorPpm)
 
-    header = [['dtaEntryUnqID',\
-               'scanNum',\
-               'mz',\
-               'logTrappedIonInt',\
-               'trappedIonsTIC',\
+    header = [['dtaEntryUnqID',
+               'scanNum',
+               'mz',
+               'logTrappedIonInt',
+               'trappedIonsTIC',
                'massErrorPpm']]
 
     dataOut = header + list(dataOut)
@@ -95,14 +95,14 @@ def do_reformat_xtandemRes( xTandemRes):
     massErrorPpm    = [x[3] for x in xTandemRes[1:]]
     dtaEntryUnqID   = ['scan=%s cs=%s' % x[0:2] for x in xTandemRes[1:]]
 
-    dataOut = zip(dtaEntryUnqID,\
-                  scanNum,\
-                  mzObs,\
+    dataOut = zip(dtaEntryUnqID,
+                  scanNum,
+                  mzObs,
                   massErrorPpm)
 
-    header = [['dtaEntryUnqID',\
-               'scanNum',\
-               'mz',\
+    header = [['dtaEntryUnqID',
+               'scanNum',
+               'mz',
                'massErrorPpm']]
 
     dataOut = header + list(dataOut)

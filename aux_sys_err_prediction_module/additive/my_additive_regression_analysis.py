@@ -158,7 +158,7 @@ def do_additive_regression_analysis( Controller, xTandemInput, dtaInput):
     allPars     = Controller.allDimensions 
     xtIndeces   = [xtColumns.index(i) for i in allPars]
     dtaIndeces  = [dtaColumns.index(i) for i in allPars]
-    par2col     = dict(zip(allPars,zip(xtIndeces,dtaIndeces)))
+    par2col     = dict(zip(allPars, zip(xtIndeces,dtaIndeces)))
 
 
     # isOverfitProofMode??

@@ -61,10 +61,10 @@ def do_parse_XTandemXmlOutput(fileName):
 
 
 
-    domainData = [[[y.getAttribute('seq'),\
-                    y.getAttribute('mh'),\
-                    y.getAttribute('delta'),\
-                    y.getAttribute('expect')\
+    domainData = [[[y.getAttribute('seq'),
+                    y.getAttribute('mh'),
+                    y.getAttribute('delta'),
+                    y.getAttribute('expect')
                     ] for y in x] for x in domainElements]
 
 
