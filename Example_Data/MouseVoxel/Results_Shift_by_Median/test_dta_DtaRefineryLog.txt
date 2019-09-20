@@ -1,0 +1,48 @@
+DtaRefinery 1.4
+
+Warning! Did not find one of the X!Tandem files
+  did not find: F:\Documents\Projects\Vlad_Petyuk\aux_xtandem_module\tandem_5digit_precision.exe
+  did not find: F:\Documents\Projects\Vlad_Petyuk\aux_xtandem_module\xtandem_default_input.xml
+  did not find: F:\Documents\Projects\Vlad_Petyuk\aux_xtandem_module\xtandem_taxonomy_list.xml
+
+Switching to the default X!Tandem location at
+  F:\Documents\Projects\Vlad_Petyuk\DTARefinery\aux_xtandem_module
+
+
+Using X!Tandem at:
+  F:\Documents\Projects\Vlad_Petyuk\DTARefinery\aux_xtandem_module\tandem_5digit_precision.exe
+
+Input file paths:
+  F:\Documents\Projects\Vlad_Petyuk\DTARefinery\aux_xtandem_module\xtandem_default_input.xml
+  F:\Documents\Projects\Vlad_Petyuk\DTARefinery\aux_xtandem_module\xtandem_taxonomy_list.xml
+
+Created X!Tandem config file at Example_Data\MouseVoxel\test_dta_CFG.xml
+    using FASTA file at         Example_Data\MouseVoxel\M_musculus_Uniprot_SPROT_2019-09-19.fasta
+
+step 1.  starting x!tandem run. 09/19/19 17:33:23
+step 1.  finished x!tandem run. 09/19/19 17:33:31
+	found files from DeconMSn
+	test_DeconMSn_log.txt
+	test_profile.txt
+
+step 2.  parsing dta and log files
+step 2.  done parsing dta and log files
+step 3.  starting refining the parent ion masses 09/19/19 17:33:32
+	refining with simpleShift/medianShift approach
+step 3.  done refining the parent ion masses 09/19/19 17:33:33
+step 4.  updating the dta file
+step 4.  done updating the dta file
+--------------------
+finished refining Example_Data\MouseVoxel\test_dta.txt 
+in 00H:00M:12S
+
+Estimates of ORIGINAL parent ion mass error distribution:
+			mean	st.dev
+Exp. Max. estimate	-1.56	0.95
+Robust estimate		-1.54	0.92
+
+Estimates of REFINED parent ion mass error distribution:
+			mean	st.dev
+Exp. Max. estimate	-0.02	0.95
+Robust estimate		0.0	0.92
+
