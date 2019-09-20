@@ -28,27 +28,38 @@ measurement error is based on robust non-parametric regression analysis of
 dependecy of error residuals on multiple parameters, including scan number, 
 m/z, ion intensity, and total ion current.
 
-## Example Data included with the Installer
+## Requirements
 
-Included with the DtaRefinery is a test dataset based on a typical mouse brain 
-LC-MS/MS dataset obtained on an LTQ-Obritrap intrument. The Thermo .raw file was 
-processed with DeconMSn to create test_dta.txt. Explore DtaRefinery's functionality 
-using the example files available at https://github.com/PNNL-Comp-Mass-Spec/DtaRefinery/Example_Data/MouseVoxel
+Requires Python 3.x, which is typically installed from either of these two sites
+* https://www.python.org/downloads/
+* https://www.anaconda.com/distribution/
 
-1) test_dta.txt
-  * A concatenated dta file from DeconMSn
-  * Unzip prior to using
-2) test_DeconMSn_log.txt
-  * The DeconMSn log file
-3) test_profile.txt
-  * The DeconMSn profile file
-4) M_musculus_Uniprot_SPROT_2019-09-19.fasta
-  * Swiss-Prot mouse proteins from https://www.uniprot.org/uniprot/?query="mus%20musculus"&fil=reviewed%3Ayes
-5) *.bat
-  * Command line batch files demonstrating various methods for improving mass measurement error (each invokes the DtaRefinery from the command line)
-  * Before using, customize the path to python.exe in the batch files
-6) *.xml
-  * Corresponding XML settings files for the batch files
+### Packages
+
+DtaRefinery requires several packages.  The following shows how to install them using `pip`
+
+```
+pip install numpy matplotlib pandas
+pip install wxPython
+```
+
+
+## Example Data
+
+The DtaRefinery repository on GitHub includes an example LC-MS/MS dataset from a mouse brain 
+sample analyzed on an LTQ-Obritrap intrument. The Thermo .raw file was 
+processed with DeconMSn to create test_dta.txt. The following files are available at 
+* https://github.com/PNNL-Comp-Mass-Spec/DtaRefinery/Example_Data/MouseVoxel
+
+| File                  | Description                                                 |
+|-----------------------|-------------------------------------------------------------|
+| _scanNum.png          | scan number                                                 |
+| test_dta.txt          | A concatenated dta file from DeconMSn; Unzip prior to using |
+| test_DeconMSn_log.txt | The DeconMSn log file                                       |
+| test_profile.txt      | The DeconMSn profile file                                   |
+| M_musculus_Uniprot_SPROT_2019-09-19.fasta  | Swiss-Prot mouse proteins from https://www.uniprot.org/uniprot/?query="mus%20musculus"&fil=reviewed%3Ayes |
+| *.bat                 | Command line batch files demonstrating various methods for improving mass measurement error (each invokes DtaRefinery from the command line). Before using, customize the path to python.exe in the batch files |
+| *.xml                 | Corresponding XML settings files for the batch files |
 
 ## Using DtaRefinery
 
@@ -85,16 +96,13 @@ dta_refinery.exe [setting file (xml)] [concatenated dta file (_dta.txt)] [FASTA 
 
 ## DtaRefinery Output files
 
-* _dta_DtaRefineryLog.txt 
-  * the processing log file
-* _dta_SETTINGS.xml
-  * the settings that were used to refine a particular dataset
-* _FIXED_dta.txt
-  * the concatenated dta file with corrected parent ion masses
-* _HIST.png
-  * mass measurement error histograms before and after procedure
-* _HIST.txt
-  * histogram data as in *_HIST.png file, but in text format
+| File                     | Description                                                  |
+|--------------------------|--------------------------------------------------------------|
+| _dta_DtaRefineryLog.txt  | the processing log file                                      |
+| _dta_SETTINGS.xml        | the settings that were used to refine a particular dataset   |
+| _FIXED_dta.txt           | the concatenated dta file with corrected parent ion masses   |
+| _HIST.png                | mass measurement error histograms before and after procedure |
+| _HIST.txt                | histogram data as in *_HIST.png file, but in text format     |
 
 Scatter plots showing mass measurement error residuals, plotted vs::
 
