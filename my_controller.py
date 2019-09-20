@@ -162,7 +162,9 @@ class Controller:
             # I moved it here
             self.printVersion()
             self.SetXtandemPaths()
-            self.performSomeChecks()
+            passedValidation = self.performSomeChecks()
+            if not passedValidation:
+                return
 
             # setup taxonomy file
             taxDoc = xml.dom.minidom.parse(self.xtandemTaxonomyListPath)
@@ -533,9 +535,15 @@ class Controller:
             try:
                 sc = Dispatch("StatConnectorSrv.StatConnector")
                 sc.Init("R")
+
+                return True
             except:
-                statusString = 'Can not find R(D)COM server!\nPlease install R(D)COM or use another regression approach.'
+                statusString = '\n\nError: Can not find R(D)COM server!\nPlease install R(D)COM or use another regression approach.'
                 print(statusString)
                 self.logFh.write(statusString + '\n')
                 self.logFh.flush()
                 self.logFh.close()
+
+                return False
+        #
+        return True
