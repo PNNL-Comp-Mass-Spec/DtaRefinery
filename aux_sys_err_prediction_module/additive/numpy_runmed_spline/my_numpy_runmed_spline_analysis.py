@@ -38,7 +38,9 @@ def runmed_spline_MAIN(ARG3, Controller):
             yFit, runMedData = runmed_spline_model(x, y, x, multiplier=bestMultiplier, **params)
             yEval, runMedData = runmed_spline_model(x, y, xEval, multiplier=bestMultiplier, **params)
             #
-            ppmArrs[ind] = [yFit, yEval]
+            if yFit[0] < 100:
+                ppmArrs[ind] = [yFit, yEval]
+
     else:
         isSuccessfulFit = False
         #
@@ -120,9 +122,11 @@ def runmed_spline_KCV_predErr(x, y, **kwargs):
 
         # ---fit runmed_spline here----------------------
         yFit, runMed = runmed_spline_model(x[train], y[train], x[test], **kwargs)
-        residualsTest = y[test] - yFit
-        predErr += sum(residualsTest ** 2)
-        allResiduals = hstack((allResiduals, residualsTest))
+        if yFit[0] < 100:
+            residualsTest = y[test] - yFit
+            predErr += sum(residualsTest ** 2)
+            allResiduals = hstack((allResiduals, residualsTest))
+
         # -----------------------------------------------
 
     if useMAD:

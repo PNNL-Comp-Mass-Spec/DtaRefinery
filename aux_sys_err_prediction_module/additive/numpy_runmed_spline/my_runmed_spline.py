@@ -51,10 +51,28 @@ def runmed_spline_model(x, y, xFit, **kwargs):
 
     multiplier = kwargs['multiplier']
     sLim = sum(urmA[:, 1] ** 2) * multiplier
-    tck = splrep(urmA[:, 0], urmA[:, 1], s=sLim)
-    yFit = splev(xFit, tck)
 
-    return yFit, (uA[:, 0], yRunMed)
+    try:
+        tck = splrep(urmA[:, 0], urmA[:, 1], s=sLim)
+        yFit = splev(xFit, tck)
+
+        # print("yFit: ", yFit[:5])
+        return yFit, (uA[:, 0], yRunMed)
+
+    except Exception as e:
+        # Exception is typically:
+        #  (s>=0.0) failed for 4th keyword s: curfit:s=-nan(ind)
+
+        # print('\n\nException:')
+        # print(e)
+        # print("\nurmA[:, 0][:10]: ", urmA[:, 0][:15])
+        # print("urmA[:, 1][:10]: ", urmA[:, 1][:15])
+        # print("sLim: ", sLim)
+
+        # Return a two element array with fit values far greater than 1
+        # The calling method should look for these and ignore the results if the fit is >= 100
+        yFit = array([100, 100])
+        return yFit, (uA[:, 0], yRunMed)
 
 
 if __name__ == '__main__':
