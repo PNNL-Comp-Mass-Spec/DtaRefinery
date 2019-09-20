@@ -80,9 +80,9 @@ choosing the "Error Correction Params" and "Misc Settings" menus.
 
 ### Running via Python 3.x
 
-Install the wx package:
+Install several packages:
 ```pip install numpy matplotlib pandas
-pip install wxPython
+pip install wxPython pywin32 scipy
 ```
 
 Call python.exe with the dta_refinery.py followed by options
