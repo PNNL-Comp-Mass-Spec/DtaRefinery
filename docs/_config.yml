@@ -1,0 +1,4 @@
+# Jekyll configuration
+name: DtaRefinery
+description: Reduces mass measurement errors for parent ions of tandem MS/MS data by modeling systematic errors based on putative peptide identifications. This information is used to subtract out errors from parent ion protonated masses.
+url: https://pnnl-comp-mass-spec.github.io/DtaRefinery/
