@@ -152,7 +152,7 @@ trypsin cleavage specificity.
 Written by Vlad Petyuk for the Department of Energy (PNNL, Richland, WA) \
 Copyright 2008, Battelle Memorial Institute. All Rights Reserved. \
 E-mail: vladislav.petyuk@pnnl.gov or proteomics@pnnl.gov \
-Website: https://omics.pnl.gov/ or https://panomics.pnnl.gov/
+Website: https://github.com/PNNL-Comp-Mass-Spec/ or https://panomics.pnnl.gov/ or https://www.pnnl.gov/integrative-omics
 
 ## License
 
